@@ -73,5 +73,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Package Installed 
 Bootstrap
 React-Bootstrap
-Jquery (CDN)
+Jquery (CDN) + Installed
 React-Router

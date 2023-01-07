@@ -1,34 +1,29 @@
 import './App.css';
-import { createBrowserRouter, RouterProvider} from 'react-router-dom';
-import NavBar from './front/navbar/navbar';
-import Homepage from './front/home/home';
-import AboutPage from './front/about/about';
-import ContactPage from './front/contact/contact';
-import Footer from './front/footer/footer';
-
-const routes = createBrowserRouter([
-  {
-    path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "about",
-    element: <AboutPage />,
-  },
-  {
-    path: "contact",
-    element: <ContactPage />,
-  },
-]);
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import NavBar from './front/component/navbar';
+import Homepage from './front/layout/home';
+import AboutPage from './front/layout/about';
+import ContactPage from './front/layout/contact';
+import Footer from './front/component/footer';
+import DashboardPage from './admin/layout/dashboard';
 
 
 function App() {
   return (
-    <>
-    <NavBar/>
-    <RouterProvider router={routes} />
-    <Footer/>
-    </>
+    <BrowserRouter>
+      <NavBar/>
+      <Routes>
+
+          {/* Front Side */}
+          <Route path="/" element={<Homepage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="contact" element={<ContactPage />} />
+
+          {/* Admin Side */}
+          <Route path="/admin" element={<DashboardPage /> } />
+      </Routes>
+      <Footer/>
+    </BrowserRouter>
   );
 }
 
