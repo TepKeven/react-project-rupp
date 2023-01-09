@@ -20,7 +20,7 @@ function TopNavbar() {
               </a>
             </li>
             <li>
-              <a href="#" onClick={hello}>
+              <a href="#">
                 <i className="fa fa-map-marker"></i> 1734 Stonecoal Road
               </a>
             </li>
@@ -143,7 +143,5 @@ function TopNavbar() {
     </header>
   );
 }
-
-
 
 export default TopNavbar;
