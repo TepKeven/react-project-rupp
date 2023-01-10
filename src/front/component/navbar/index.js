@@ -1,10 +1,25 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import React, { useEffect, useState } from "react";
+import "./index.css"
+
 
 function TopNavbar() {
+
+  const [dropdown,setDropdown] = useState(false)
+  const [cartItems,setCartItems] = useState([
+    {title: "Product 1", quantity: 1, price: 980.00,image: "./assets/images/products/product01.png"},
+    {title: "Product 2", quantity: 2, price: 980.00,image: "./assets/images/products/product02.png"},
+    {title: "Product 3", quantity: 2, price: 90.00,image: "./assets/images/products/product02.png"}
+    
+  ])
+
+  function toggleDropdown(){
+
+    setDropdown(!dropdown)
+    
+  }
+
   return (
+    <>
     <header>
       <div id="top-header">
         <div className="container">
@@ -41,15 +56,15 @@ function TopNavbar() {
       </div>
       <div id="header">
         <div className="container">
-          <div className="row">
+          <div className="row w-100">
             <div className="col-md-3">
               <div className="header-logo">
                 <a href="#" className="logo">
-                  <img src="./img/logo.png" alt="" />
+                  <img src="./assets/images/logo.png" alt="" />
                 </a>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-5">
               <div className="header-search">
                 <form>
                   <select className="input-select">
@@ -71,55 +86,38 @@ function TopNavbar() {
                     <div className="qty">2</div>
                   </a>
                 </div>
-                <div className="dropdown">
-                  <a
-                    className="dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-expanded="true"
-                  >
+                <div className={"dropdown " + (dropdown ? "open" : "")} onClick={toggleDropdown}>
+                  <a className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                     <i className="fa fa-shopping-cart"></i>
                     <span>Your Cart</span>
                     <div className="qty">3</div>
                   </a>
                   <div className="cart-dropdown">
                     <div className="cart-list">
-                      <div className="product-widget">
-                        <div className="product-img">
-                          <img src="./img/product01.png" alt="" />
-                        </div>
-                        <div className="product-body">
-                          <h3 className="product-name">
-                            <a href="#">product name goes here</a>
-                          </h3>
-                          <h4 className="product-price">
-                            <span className="qty">1x</span>$980.00
-                          </h4>
-                        </div>
-                        <button className="delete">
-                          <i className="fa fa-close"></i>
-                        </button>
-                      </div>
-
-                      <div className="product-widget">
-                        <div className="product-img">
-                          <img src="./img/product02.png" alt="" />
-                        </div>
-                        <div className="product-body">
-                          <h3 className="product-name">
-                            <a href="#">product name goes here</a>
-                          </h3>
-                          <h4 className="product-price">
-                            <span className="qty">3x</span>$980.00
-                          </h4>
-                        </div>
-                        <button className="delete">
-                          <i className="fa fa-close"></i>
-                        </button>
-                      </div>
+                      {cartItems.map((cartItem) => {
+                        return (
+                          <div className="product-widget">
+                            <div className="product-img">
+                              <img src={cartItem.image} alt="" />
+                            </div>
+                            <div className="product-body">
+                              <h3 className="product-name">
+                                <a href="#">{cartItem.title}</a>
+                              </h3>
+                              <h4 className="product-price">
+                                <span className="qty">{cartItem.quantity}x</span>{`\$ ${cartItem.price.toFixed(2)}`}
+                              </h4>
+                            </div>
+                            <button className="delete">
+                              <i className="fa fa-close"></i>
+                            </button>
+                          </div>
+                        )
+                      })}
                     </div>
                     <div className="cart-summary">
-                      <small>3 Item(s) selected</small>
-                      <h5>SUBTOTAL: $2940.00</h5>
+                      <small>{cartItems.length} Item(s) selected</small>
+                      <h6>SUBTOTAL: $ {cartItems.reduce((prev,next) => prev + next.price * next.quantity, 0).toFixed(2)}</h6>
                     </div>
                     <div className="cart-btns">
                       <a href="#">View Cart</a>
@@ -141,6 +139,22 @@ function TopNavbar() {
         </div>
       </div>
     </header>
+    <nav id="navigation">
+    <div class="container">
+      <div id="responsive-nav">
+        <ul class="main-nav nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Hot Deals</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="#">Laptops</a></li>
+          <li><a href="#">Smartphones</a></li>
+          <li><a href="#">Cameras</a></li>
+          <li><a href="#">Accessories</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  </>
   );
 }
 

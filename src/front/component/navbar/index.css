@@ -1,0 +1,14 @@
+a {
+    text-decoration: none;
+}
+
+.input-select,
+.input-select+.input {
+    outline: none;
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    color: black;
+}

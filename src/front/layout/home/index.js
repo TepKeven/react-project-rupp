@@ -1,8 +1,11 @@
 import React from "react";
 
 function Homepage(){
+    
     return (
-        <p>homepage</p>
+        <div>
+
+        </div>
     )
 }
 
