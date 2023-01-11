@@ -1,15 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./index.css"
 
-
-function TopNavbar() {
+function TopNavbarComponent() {
 
   const [dropdown,setDropdown] = useState(false)
+
   const [cartItems,setCartItems] = useState([
-    {title: "Product 1", quantity: 1, price: 980.00,image: "./assets/images/products/product01.png"},
-    {title: "Product 2", quantity: 2, price: 980.00,image: "./assets/images/products/product02.png"},
-    {title: "Product 3", quantity: 2, price: 90.00,image: "./assets/images/products/product02.png"}
+    {id: 1, title: "Product 1", quantity: 1, price: 980.00,image: "./assets/images/products/product01.png"},
+    {id: 2, title: "Product 2", quantity: 2, price: 980.00,image: "./assets/images/products/product02.png"},
+    {id: 3, title: "Product 3", quantity: 2, price: 90.00,image: "./assets/images/products/product02.png"},
+    {id: 4, title: "Product 4", quantity: 2, price: 100.00,image: "./assets/images/products/product01.png"}
     
+  ])
+  const [categoryItems, setCategoryItems] = useState([
+    {id: 1, title: "Home", href: "#"},
+    {id: 2, title: "Hot Deals", href: "#"},
+    {id: 3, title: "Categories", href: "#"},
+    {id: 4, title: "Laptops", href: "#"},
+    {id: 5, title: "Smartphones", href: "#"},
+    {id: 6, title: "Cameras", href: "#"},
+    {id: 7, title: "Accessories", href: "#"},
   ])
 
   function toggleDropdown(){
@@ -90,13 +100,13 @@ function TopNavbar() {
                   <a className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                     <i className="fa fa-shopping-cart"></i>
                     <span>Your Cart</span>
-                    <div className="qty">3</div>
+                    <div className="qty">{cartItems.length}</div>
                   </a>
                   <div className="cart-dropdown">
                     <div className="cart-list">
                       {cartItems.map((cartItem) => {
                         return (
-                          <div className="product-widget">
+                          <div className="product-widget" key={cartItem.id}>
                             <div className="product-img">
                               <img src={cartItem.image} alt="" />
                             </div>
@@ -140,16 +150,14 @@ function TopNavbar() {
       </div>
     </header>
     <nav id="navigation">
-    <div class="container">
+    <div className="container">
       <div id="responsive-nav">
-        <ul class="main-nav nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Hot Deals</a></li>
-          <li><a href="#">Categories</a></li>
-          <li><a href="#">Laptops</a></li>
-          <li><a href="#">Smartphones</a></li>
-          <li><a href="#">Cameras</a></li>
-          <li><a href="#">Accessories</a></li>
+        <ul className="main-nav nav">
+          {categoryItems.map((categoryItem) => {
+            return (
+              <li className={categoryItem.id == 1 ? "active" : "" } key={categoryItem.id}><a href={categoryItem.href}>{categoryItem.title}</a></li>
+            )
+          })}
         </ul>
       </div>
     </div>
@@ -158,4 +166,4 @@ function TopNavbar() {
   );
 }
 
-export default TopNavbar;
+export default TopNavbarComponent;
