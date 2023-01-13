@@ -7,12 +7,13 @@ import AboutPage from './front/layout/about';
 import ContactPage from './front/layout/contact';
 import Footer from './front/component/footer';
 import DashboardPage from './admin/layout/dashboard';
+import CategoryPage from "./admin/layout/category";
 
 
 function App() {
   return (
     <BrowserRouter>
-      <NavBar/>
+      {window.location.pathname.startsWith("/admin") ? null : <NavBar/>}
       <Routes>
 
           {/* Front Side */}
@@ -22,8 +23,9 @@ function App() {
 
           {/* Admin Side */}
           <Route path="/admin" element={<DashboardPage /> } />
+          <Route path="/admin/category" element={<CategoryPage /> } />
       </Routes>
-      <Footer/>
+      {window.location.pathname.startsWith("/admin") ? null : <Footer/>}
     </BrowserRouter>
   );
 }
