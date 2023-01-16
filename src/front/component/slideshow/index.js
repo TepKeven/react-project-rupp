@@ -8,25 +8,25 @@ function SlideshowComponent() {
       id: 1,
       title: "Welcome to Shop",
       descriptipn: "The Best Electronics in Cambodia. <br/> The Best Electronics in Cambodia.",
-      image: "./assets/images/banners/banner1.jpg",
+      image: "/assets/images/banners/banner1.jpg",
     },
     {
       id: 2,
       title: "Welcome to Shop",
       descriptipn: "The Best Electronics in Cambodia. <br/> The Best Electronics in Cambodia.",
-      image: "./assets/images/banners/banner1.jpg",
+      image: "/assets/images/banners/banner1.jpg",
     },
     {
       id: 3,
       title: "Welcome to Shop",
       descriptipn: "The Best Electronics in Cambodia. <br/> The Best Electronics in Cambodia.",
-      image: "./assets/images/banners/banner1.jpg",
+      image: "/assets/images/banners/banner1.jpg",
     },
     {
       id: 4,
       title: "Welcome to Shop",
       descriptipn: "The Best Electronics in Cambodia. <br/> The Best Electronics in Cambodia.",
-      image: "./assets/images/banners/banner1.jpg",
+      image: "/assets/images/banners/banner1.jpg",
     },
   ]);
 

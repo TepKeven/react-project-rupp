@@ -221,7 +221,7 @@ function DashboardPage() {
                               <td className="col-3">
                                 <div className="d-flex align-items-center">
                                   <div className="avatar avatar-md">
-                                    <img src="./assets/images/faces/1.jpg" />
+                                    <img src="/assets/images/faces/1.jpg" />
                                   </div>
                                   <p className="font-bold ms-3 mb-0">Si Cantik</p>
                                 </div>
@@ -236,7 +236,7 @@ function DashboardPage() {
                               <td className="col-3">
                                 <div className="d-flex align-items-center">
                                   <div className="avatar avatar-md">
-                                    <img src="./assets/images/faces/1.jpg" />
+                                    <img src="/assets/images/faces/1.jpg" />
                                   </div>
                                   <p className="font-bold ms-3 mb-0">Si Ganteng</p>
                                 </div>
@@ -261,7 +261,7 @@ function DashboardPage() {
                 <div className="card-body py-4 px-5">
                   <div className="d-flex align-items-center">
                     <div className="avatar avatar-xl">
-                      <img src="./assets/images/faces/1.jpg" alt="Face 1" />
+                      <img src="/assets/images/faces/1.jpg" alt="Face 1" />
                     </div>
                     <div className="ms-3 name">
                       <h5 className="font-bold">John Duck</h5>
@@ -277,7 +277,7 @@ function DashboardPage() {
                 <div className="card-content pb-4">
                   <div className="recent-message d-flex px-4 py-3">
                     <div className="avatar avatar-lg">
-                      <img src="./assets/images/faces/1.jpg" />
+                      <img src="/assets/images/faces/1.jpg" />
                     </div>
                     <div className="name ms-4">
                       <h5 className="mb-1">Hank Schrader</h5>
@@ -286,7 +286,7 @@ function DashboardPage() {
                   </div>
                   <div className="recent-message d-flex px-4 py-3">
                     <div className="avatar avatar-lg">
-                      <img src="./assets/images/faces/1.jpg" />
+                      <img src="/assets/images/faces/1.jpg" />
                     </div>
                     <div className="name ms-4">
                       <h5 className="mb-1">Dean Winchester</h5>
@@ -295,7 +295,7 @@ function DashboardPage() {
                   </div>
                   <div className="recent-message d-flex px-4 py-3">
                     <div className="avatar avatar-lg">
-                      <img src="./assets/images/faces/1.jpg" />
+                      <img src="/assets/images/faces/1.jpg" />
                     </div>
                     <div className="name ms-4">
                       <h5 className="mb-1">John Dodol</h5>

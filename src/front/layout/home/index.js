@@ -25,7 +25,7 @@ function Homepage(){
 					<div className="col-md-4 col-xs-6">
 						<div className="shop">
 							<div className="shop-img">
-								<img src="./assets/images/shop/shop01.png" alt="" />
+								<img src="/assets/images/shop/shop01.png" alt="" />
 							</div>
 							<div className="shop-body">
 								<h3>Laptop<br />Collection</h3>
@@ -36,7 +36,7 @@ function Homepage(){
 					<div className="col-md-4 col-xs-6">
 						<div className="shop">
 							<div className="shop-img">
-								<img src="./assets/images/shop/shop03.png" alt="" />
+								<img src="/assets/images/shop/shop03.png" alt="" />
 							</div>
 							<div className="shop-body">
 								<h3>Accessories<br />Collection</h3>
@@ -47,7 +47,7 @@ function Homepage(){
 					<div className="col-md-4 col-xs-6">
 						<div className="shop">
 							<div className="shop-img">
-								<img src="./assets/images/shop/shop02.png" alt="" />
+								<img src="/assets/images/shop/shop02.png" alt="" />
 							</div>
 							<div className="shop-body">
 								<h3>Cameras<br />Collection</h3>

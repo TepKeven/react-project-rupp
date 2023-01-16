@@ -6,10 +6,10 @@ function TopNavbarComponent() {
   const [dropdown,setDropdown] = useState(false)
 
   const [cartItems,setCartItems] = useState([
-    {id: 1, title: "Product 1", quantity: 1, price: 980.00,image: "./assets/images/products/product01.png"},
-    {id: 2, title: "Product 2", quantity: 2, price: 980.00,image: "./assets/images/products/product02.png"},
-    {id: 3, title: "Product 3", quantity: 2, price: 90.00,image: "./assets/images/products/product02.png"},
-    {id: 4, title: "Product 4", quantity: 2, price: 100.00,image: "./assets/images/products/product01.png"}
+    {id: 1, title: "Product 1", quantity: 1, price: 980.00,image: "/assets/images/products/product01.png"},
+    {id: 2, title: "Product 2", quantity: 2, price: 980.00,image: "/assets/images/products/product02.png"},
+    {id: 3, title: "Product 3", quantity: 2, price: 90.00,image: "/assets/images/products/product02.png"},
+    {id: 4, title: "Product 4", quantity: 2, price: 100.00,image: "/assets/images/products/product01.png"}
     
   ])
   const [categoryItems, setCategoryItems] = useState([
@@ -70,7 +70,7 @@ function TopNavbarComponent() {
             <div className="col-md-3">
               <div className="header-logo">
                 <a href="#" className="logo">
-                  <img src="./assets/images/logo.png" alt="" />
+                  <img src="/assets/images/logo.png" alt="" />
                 </a>
               </div>
             </div>

@@ -5,7 +5,7 @@ function ProductComponent({product}) {
   return (
     <div className="product" key={product.id}>
       <div className="product-img">
-        <img src="./assets/images/products/product01.png" alt="" />
+        <img src="/assets/images/products/product01.png" alt="" />
         <div className="product-label">
           <span className="sale">
             -
