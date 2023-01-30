@@ -1,0 +1,36 @@
+.ql-container.ql-snow{
+    font-size:15px;
+    height:350px;
+}
+
+.language-tab{
+   display: block;
+   padding: 10px 15px;
+   border-radius: 2px 2px 0 0;
+   color:black;
+
+}
+
+.section-tab{
+    border-radius: 2px 2px 0 0;
+    padding: 10px 15px;
+    display: block;
+    color:black;
+}   
+
+.active-tab{
+    border: solid 2px rgb(204, 204, 204);
+    border-bottom-color: transparent;
+}
+
+.active-tab:visited{
+    color:black;
+}
+
+.tabs-row{
+    border-bottom: solid 1px rgb(211, 209, 209);
+}
+
+.image-input{
+    cursor: pointer;
+}

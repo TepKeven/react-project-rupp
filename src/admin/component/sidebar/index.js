@@ -1,10 +1,29 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useSelector } from "react-redux";
+import axios from "axios"
 
 
 function SidebarComponent() {
 
-  const showSidebar = useSelector((state) => state.showSidebar);
+  const url = new URL(window.location)
+  const params = new URLSearchParams(url.search);
+  const [dashboardItems, setDashboardItems] = useState([])
+  const [startIndex,setStartIndex] = useState((params.get("start") == undefined || params.get("start") < 1) ? 1 : params.get("start"))
+  const [endIndex, setEndIndex] = useState((params.get("end") == undefined || params.get("end") < params.get("start")) ? 20 : params.get("end"))
+
+  useEffect(() => {
+
+    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/sidebar?start=${startIndex}&end=${endIndex}`)
+      .then(function (response) {
+        setDashboardItems(response.data.sidebar_items)
+      })
+  },[])
+
+    const setActiveTab = (dashboard_item_id) => {
+      sessionStorage.setItem("activeTab",dashboard_item_id)
+    }
+
+    const showSidebar = useSelector((state) => state.showSidebar);
   
   return (
     <div id="sidebar" className={showSidebar == true ? "active" : ""}>
@@ -27,14 +46,16 @@ function SidebarComponent() {
           <ul className="menu">
             <li className="sidebar-title">Menu</li>
 
-            <li className="sidebar-item active ">
-              <a href="/admin" className="sidebar-link">
-                <i className="bi bi-grid-fill"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
+            {dashboardItems.map((dashboardItem, index) => (
+              <li className={`sidebar-item ${dashboardItem.dashboard_item_id == sessionStorage.getItem("activeTab") ? "active" : ""}`} onClick={() => setActiveTab(dashboardItem.dashboard_item_id)}>
+                <a href={`${dashboardItem.href}?dashboard=${dashboardItem.dashboard_item_id}`} className="sidebar-link">
+                  <i className={dashboardItem.icon}></i>
+                  <span>{dashboardItem.name}</span>
+                </a>
+              </li>
+            ))}
 
-            <li className="sidebar-item  has-sub">
+            {/* <li className="sidebar-item  has-sub">
               <a href="/admin/category" className="sidebar-link">
                 <i className="bi bi-stack"></i>
                 <span>Category</span>
@@ -86,9 +107,9 @@ function SidebarComponent() {
             </li>
 
             <li className="sidebar-item  has-sub">
-              <a href="#" className="sidebar-link">
+              <a href="/admin/product" className="sidebar-link">
                 <i className="bi bi-collection-fill"></i>
-                <span>Extra Components</span>
+                <span>Products</span>
               </a>
               <ul className="submenu ">
                 <li className="submenu-item ">
@@ -110,9 +131,9 @@ function SidebarComponent() {
             </li>
 
             <li className="sidebar-item  has-sub">
-              <a href="#" className="sidebar-link">
+              <a href="/admin/order" className="sidebar-link">
                 <i className="bi bi-grid-1x2-fill"></i>
-                <span>Layouts</span>
+                <span>Orders</span>
               </a>
               <ul className="submenu ">
                 <li className="submenu-item ">
@@ -130,12 +151,19 @@ function SidebarComponent() {
               </ul>
             </li>
 
-            <li className="sidebar-title">Forms &amp; Tables</li>
-
             <li className="sidebar-item  has-sub">
-              <a href="#" className="sidebar-link">
+              <a href="/admin/customer" className="sidebar-link">
+                <i className="bi bi-grid-1x2-fill"></i>
+                <span>Customers</span>
+              </a>
+            </li> */}
+
+            {/* <li className="sidebar-title">Forms &amp; Tables</li> */}
+
+            {/* <li className="sidebar-item  has-sub">
+              <a href="/admin/user" className="sidebar-link">
                 <i className="bi bi-hexagon-fill"></i>
-                <span>Form Elements</span>
+                <span>Users</span>
               </a>
               <ul className="submenu ">
                 <li className="submenu-item ">
@@ -199,9 +227,9 @@ function SidebarComponent() {
                 <i className="bi bi-file-earmark-spreadsheet-fill"></i>
                 <span>Datatable</span>
               </a>
-            </li>
+            </li> */}
 
-            <li className="sidebar-title">Extra UI</li>
+            {/* <li className="sidebar-title">Extra UI</li>
 
             <li className="sidebar-item  has-sub">
               <a href="#" className="sidebar-link">
@@ -237,9 +265,9 @@ function SidebarComponent() {
                   <a href="ui-icons-dripicons.html">Dripicons</a>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
-            <li className="sidebar-item  has-sub">
+            {/* <li className="sidebar-item  has-sub">
               <a href="#" className="sidebar-link">
                 <i className="bi bi-bar-chart-fill"></i>
                 <span>Charts</span>
@@ -372,7 +400,7 @@ function SidebarComponent() {
                 <i className="bi bi-cash"></i>
                 <span>Donate</span>
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
         <button className="sidebar-toggler btn x">

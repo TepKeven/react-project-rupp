@@ -1,0 +1,9 @@
+.quill-dark .ql-container.ql-snow{
+    background-color: black;
+    color:white;
+}
+
+.quill-light .ql-container.ql-snow{
+    background-color: white;
+    color:black;
+}

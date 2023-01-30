@@ -240,6 +240,11 @@ var globalVariable = {
       },
     },
   },
+  system_language: [
+    {id: 1, language_code: "en"},
+    {id: 2, language_code: "km"}
+  ]
+
 };
 
 export default globalVariable;
