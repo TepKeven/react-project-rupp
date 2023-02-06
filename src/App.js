@@ -22,6 +22,14 @@ import OrderEditPage from "./admin/layout/order/orderEdit";
 import OrderViewPage from "./admin/layout/order/orderView";
 import UserPage from "./admin/layout/user";
 import UserAddPage from "./admin/layout/user/userAdd";
+import UserEditPage from "./admin/layout/user/userEdit";
+import UserRolePage from "./admin/layout/userRole";
+import UserRoleAddPage from "./admin/layout/userRole/userRoleAdd";
+import UserRoleEditPage from "./admin/layout/userRole/userRoleEdit";
+import LoginPage from "./admin/layout/auth/login";
+import SlideshowPage from "./admin/layout/slideshow";
+import SlideshowAddPage from "./admin/layout/slideshow/slideshowAdd";
+import SlideshowEditPage from "./admin/layout/slideshow/slideshowEdit";
 
 
 function App() {
@@ -37,8 +45,11 @@ function App() {
 
           {/* Admin Side */}
 
+          {/* Login */}
+          <Route path="/admin/login" element={<LoginPage /> } />
+
           {/* Category */}
-          <Route path="/admin" element={<DashboardPage /> } />
+          <Route path="/admin/dashboard" element={<DashboardPage /> } />
           <Route path="/admin/category" element={<CategoryPage /> } />
           <Route path="/admin/category/edit/:category_id" element={<CategoryEditPage/>} />
           <Route path="/admin/category/new" element={<CategoryAddPage/>} />
@@ -59,8 +70,20 @@ function App() {
           <Route path="/admin/customer/new" element={<CustomerAddPage />} />
           <Route path="/admin/customer/edit/:customer_id" element={<CustomerEditPage />} />
 
+          {/* User */}
           <Route path="/admin/user" element={<UserPage />} />
           <Route path="/admin/user/new" element={<UserAddPage />} />
+          <Route path="/admin/user/edit/:user_id" element={<UserEditPage />} />
+
+          {/* User Role */}
+          <Route path="/admin/userrole" element={<UserRolePage />} />
+          <Route path="/admin/userrole/new" element={<UserRoleAddPage />} />
+          <Route path="/admin/userrole/edit/:user_role_id" element={<UserRoleEditPage />} />
+
+          {/* Slideshow */}
+          <Route path="/admin/slideshow" element={<SlideshowPage />} />
+          <Route path="/admin/slideshow/new" element={<SlideshowAddPage />} />
+          <Route path="/admin/slideshow/edit/:slideshow_id" element={<SlideshowEditPage />} />
       </Routes>
       {window.location.pathname.startsWith("/admin") ? null : <Footer/>}
     </BrowserRouter>

@@ -49,9 +49,14 @@ function ProductEditPage() {
 
       axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/product/edit/${params.product_id}`
       ,formData
+      ,globalVariable.axiosConfig
+
       ).then(response => {
         console.log(response.data)
         // window.location.assign("/admin/product");
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
 
   }
@@ -62,8 +67,7 @@ function ProductEditPage() {
   
   useEffect(() => {
 
-    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/product/edit/${params.product_id}`, {
-      })
+    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/product/edit/${params.product_id}`, globalVariable.axiosConfig)
       .then(function (response) {
         setProductInfo(response.data.product)
         setProductToCategory(response.data.product_to_category_id)
@@ -75,7 +79,10 @@ function ProductEditPage() {
         
         loadURLToInputFiled(`${process.env.REACT_APP_IMAGE_PRODUCT}/${response.data.product.image}`)
         
-      }).catch((error) => console.log(error));
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
+      })
   },[])
 
  

@@ -5,6 +5,7 @@ import SidebarComponent from "../../component/sidebar";
 import axios from "axios"
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import globalVariable from "../../variable";
 
 function CategoryPage(){
 
@@ -23,11 +24,15 @@ function CategoryPage(){
     
     useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/category?start=${startIndex}&end=${endIndex}`)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/category?start=${startIndex}&end=${endIndex}`,globalVariable.axiosConfig
+      )
       .then(function (response) {
-        console.log(response.data.categories)
-        setCategoryFilters(response.data.categories)
-        setCategoryLength(response.data.length)
+          // console.log(response.data)
+          setCategoryFilters(response.data.categories)
+          setCategoryLength(response.data.length)
+      }).catch((error) => {
+          // console.log(error)
+          window.location.assign("/admin/login")
       })
         
         setPagination(Math.floor((startIndex / perPage) + 1))
@@ -64,10 +69,15 @@ function CategoryPage(){
 
       axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/category/delete`,{
         "ids" : deleteIDs
-      })
+      },
+        globalVariable.axiosConfig
+      )
       .then(function (response) {
         console.log(response.data)
-        // window.location.assign("/admin/category")
+        window.location.assign("/admin/category")
+      }).catch((error) => {
+        console.log(error)
+        window.location.assign("/admin/login")
       })
     }
 
