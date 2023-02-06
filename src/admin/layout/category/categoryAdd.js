@@ -37,18 +37,24 @@ function CategoryAddPage() {
     var form = document.getElementById(form_name)
     var formData = new FormData(form);
 
-    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/category/new`, formData).then(response => {
+    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/category/new`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
-      // window.location.assign("/admin/category");
+      window.location.assign("/admin/category");
+    }).catch((error) => {
+      // console.log(error)
+      window.location.assign("/admin/login")
     })
 
   }
 
   useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/category?start=1&end=0`)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/category?start=1&end=0`,globalVariable.axiosConfig)
       .then(function (response) {
         setCategoryItems(response.data.categories)
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
       
       

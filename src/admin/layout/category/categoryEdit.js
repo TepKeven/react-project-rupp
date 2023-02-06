@@ -41,10 +41,13 @@ function CategoryEditPage() {
       var formData = new FormData(form);
 
       axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/category/edit/${params.category_id}`
-      ,formData
+      ,formData, globalVariable.axiosConfig
       ).then(response => {
         console.log(response.data)
         window.location.assign("/admin/category");
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
 
   }
@@ -55,15 +58,17 @@ function CategoryEditPage() {
   
   useEffect(() => {
 
-    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/category/edit/${params.category_id}`, {
-      })
+    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/category/edit/${params.category_id}`, globalVariable.axiosConfig)
       .then(function (response) {
         setCategoryInfo(response.data.category)
         setCategoryItems(response.data.categoryList)
         setCategoryImage((response.data.category.image == "" || response.data.category.image == null) ? "/assets/images/no_image.png" : `${process.env.REACT_APP_IMAGE_CATEGORY}/${response.data.category.image}`)
         loadURLToInputFiled(`${process.env.REACT_APP_IMAGE_CATEGORY}/${response.data.category.image}`)
         
-      }).catch((error) => console.log(error));
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
+      })
   },[])
 
  

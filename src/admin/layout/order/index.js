@@ -5,6 +5,7 @@ import SidebarComponent from "../../component/sidebar";
 import axios from "axios"
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import globalVariable from "../../variable";
 
 function OrderPage(){
 
@@ -24,11 +25,14 @@ function OrderPage(){
     
     useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/order?start=${startIndex}&end=${endIndex}`)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/order?start=${startIndex}&end=${endIndex}`,globalVariable.axiosConfig)
       .then(function (response) {
         setOrderFilters(response.data.orders)
         setOrderStatuses(response.data.order_statuses)
         setOrderLength(response.data.length)
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
         
         setPagination(Math.floor((startIndex / perPage) + 1))
@@ -65,10 +69,15 @@ function OrderPage(){
 
       axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/order/delete`,{
         "order_ids" : deleteIDs
-      })
+      }, 
+        globalVariable.axiosConfig
+      )
       .then(function (response) {
         console.log(response.data)
         // window.location.assign("/admin/order")
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
     }
 

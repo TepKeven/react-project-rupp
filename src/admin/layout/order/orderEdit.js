@@ -6,6 +6,7 @@ import NavbarComponent from "../../component/navbar";
 import SidebarComponent from "../../component/sidebar";
 import "./index.css";
 import axios from "axios"
+import globalVariable from "../../variable";
 
 function OrderEditPage() {
 
@@ -47,9 +48,12 @@ function OrderEditPage() {
         
     formData.append("orderProducts",JSON.stringify(orderProducts))
 
-    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/order/edit/${params.order_id}`, formData).then(response => {
+    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/order/edit/${params.order_id}`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
       
+    }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
     })
 
   }
@@ -95,7 +99,7 @@ function OrderEditPage() {
 
   useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/order/edit/${params.order_id}`)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/order/edit/${params.order_id}`, globalVariable.axiosConfig)
       .then(function (response) {
         setCustomers(response.data.customers)
         setCustomerGroups(response.data.customer_groups)
@@ -109,6 +113,9 @@ function OrderEditPage() {
         setOrderProducts(response.data.order_products)
         setOrderInfo(response.data.order)
         console.log(response.data)
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
       
       

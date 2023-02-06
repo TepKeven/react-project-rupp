@@ -15,12 +15,15 @@ function SidebarComponent() {
 
     axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/sidebar?start=${startIndex}&end=${endIndex}`)
       .then(function (response) {
-        setDashboardItems(response.data.sidebar_items)
+          setDashboardItems(response.data.sidebar_items)
+      }).catch((error) => {
+        console.log(error)
+        // window.location.assign("/admin/login")
       })
   },[])
 
     const setActiveTab = (dashboard_item_id) => {
-      sessionStorage.setItem("activeTab",dashboard_item_id)
+      sessionStorage.setItem("activeTab", dashboard_item_id)
     }
 
     const showSidebar = useSelector((state) => state.showSidebar);

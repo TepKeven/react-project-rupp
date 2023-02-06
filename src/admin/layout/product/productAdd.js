@@ -42,21 +42,27 @@ function ProductAddPage() {
     var form = document.getElementById(form_name)
     var formData = new FormData(form);
 
-    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/product/new`, formData).then(response => {
+    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/product/new`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
       // window.location.assign("/admin/product");
+    }).catch((error) => {
+      // console.log(error)
+      window.location.assign("/admin/login")
     })
 
   }
 
   useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/product/new`)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/product/new`, globalVariable.axiosConfig)
       .then(function (response) {
         setCategoryItems(response.data.categories)
         setManufacturerItems(response.data.manufacturers)
         setStockStatuses(response.data.stock_statuses)
         setTaxClasses(response.data.tax_classes)
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
       
       

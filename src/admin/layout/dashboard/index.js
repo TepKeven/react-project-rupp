@@ -1,11 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import FooterComponent from "../../component/footer";
 import NavbarComponent from "../../component/navbar";
 import SidebarComponent from "../../component/sidebar";
+import axios from "axios"
 import globalVariable from "../../variable";
 
 function DashboardPage() {
+
+  const [dashboardInfo, setDashboardInfo] = useState({})
+  const [salesMonthSeries, setSalesMonthSeries] = useState([])
+  const [subscriberNumberSeries, setSubscriberNumberSeries] = useState([])
+  const [salesByCountries, setSalesByCountries] = useState({})
+  const [linegraphStyle, setLineGraphStyle] = useState([
+      globalVariable.optionsCountriesRed,
+      globalVariable.optionsCountriesBlue,
+      globalVariable.optionsCountriesCornFlower,
+      globalVariable.optionsCountriesGreen,
+      globalVariable.optionsCountriesOrange
+  ])
+
+  var salesPerEachMonth;
+
+  useEffect(() => {
+
+    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/dashboard`, globalVariable.axiosConfig)
+      .then(function (response) {
+        
+        // console.log(response.data)
+
+        var newSalesMonthSeries = globalVariable.seriesProfileVisit
+
+        newSalesMonthSeries = [
+          {
+            name: "sales",
+            data: response.data.overall_order_by_month
+          }
+        ]
+
+        var subscriberCount = response.data.newsletter_count.map(newsletter => {
+          return newsletter.count;
+        })
+
+        setDashboardInfo(response.data)
+        setSalesMonthSeries(newSalesMonthSeries)
+        setSubscriberNumberSeries(subscriberCount)
+        setSalesByCountries(response.data.order_country_by_month)
+        console.log(response.data.order_country_by_month)
+
+      }).catch((error) => {
+        console.log(error)
+        // window.location.assign("/admin/login")
+      })
+      
+  },[])
   
   return (
     <div id="app">
@@ -30,9 +78,9 @@ function DashboardPage() {
                         </div>
                         <div className="col-md-8">
                           <h6 className="text-muted font-semibold">
-                            Profile Views
+                            Order Count
                           </h6>
-                          <h6 className="font-extrabold mb-0">112.000</h6>
+                          <h6 className="font-extrabold mb-0">{dashboardInfo.orders && dashboardInfo.orders.length} Orders</h6>
                         </div>
                       </div>
                     </div>
@@ -48,8 +96,8 @@ function DashboardPage() {
                           </div>
                         </div>
                         <div className="col-md-8">
-                          <h6 className="text-muted font-semibold">Followers</h6>
-                          <h6 className="font-extrabold mb-0">183.000</h6>
+                          <h6 className="text-muted font-semibold">Profit Total</h6>
+                          <h6 className="font-extrabold mb-0">{dashboardInfo.total_revenue && `$ ${dashboardInfo.total_revenue.total}`}</h6>
                         </div>
                       </div>
                     </div>
@@ -65,8 +113,8 @@ function DashboardPage() {
                           </div>
                         </div>
                         <div className="col-md-8">
-                          <h6 className="text-muted font-semibold">Following</h6>
-                          <h6 className="font-extrabold mb-0">80.000</h6>
+                          <h6 className="text-muted font-semibold">Customers</h6>
+                          <h6 className="font-extrabold mb-0">{dashboardInfo.customers && dashboardInfo.customers.length} People</h6>
                         </div>
                       </div>
                     </div>
@@ -82,8 +130,8 @@ function DashboardPage() {
                           </div>
                         </div>
                         <div className="col-md-8">
-                          <h6 className="text-muted font-semibold">Saved Post</h6>
-                          <h6 className="font-extrabold mb-0">112</h6>
+                          <h6 className="text-muted font-semibold">Online</h6>
+                          <h6 className="font-extrabold mb-0">{dashboardInfo.customer_online && dashboardInfo.customer_online.customer_online} People</h6>
                         </div>
                       </div>
                     </div>
@@ -94,13 +142,13 @@ function DashboardPage() {
                 <div className="col-12">
                   <div className="card">
                     <div className="card-header">
-                      <h4>Profile Visit</h4>
+                      <h4>Sales Per Month</h4>
                     </div>
                     <div className="card-body">
                       <div id="chart-profile-visit">
                         <Chart
-                          options={globalVariable.optionsProfileVisit}
-                          series={globalVariable.seriesProfileVisit}
+                          options={globalVariable.optionsSalesPerMonth}
+                          series={salesMonthSeries}
                           type="bar"
                         />
                       </div>
@@ -112,38 +160,40 @@ function DashboardPage() {
                 <div className="col-12 col-xl-4">
                   <div className="card">
                     <div className="card-header">
-                      <h4>Profile Visit</h4>
+                      <h4>Orders by Countries</h4>
                     </div>
                     <div className="card-body">
-                      <div className="row">
-                        <div className="col-6">
-                          <div className="d-flex align-items-center">
-                            <svg
-                              className="bi text-primary"
-                              width="32"
-                              height="32"
-                              fill="blue"
-                              style={{ width: 10 }}
-                            >
-                              <use xlinkHref="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
-                            </svg>
-                            <h5 className="mb-0 ms-3">Europe</h5>
+                      {Object.entries(salesByCountries).map(([key, salesByCountry], index) => (
+                        <div className="row">
+                          <div className="col-6">
+                            <div className="d-flex align-items-center">
+                              <svg
+                                className="bi text-primary"
+                                width="32"
+                                height="32"
+                                fill="blue"
+                                style={{ width: 10 }}
+                              >
+                                <use xlinkHref="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                              </svg>
+                              <h5 className="mb-0 ms-3">{key}</h5>
+                            </div>
+                          </div>
+                          <div className="col-6">
+                            <h5 className="mb-0">{salesByCountry["order_count"]}</h5>
+                          </div>
+                          <div className="col-12">
+                            <div id="chart-europe">
+                              <Chart
+                                options={linegraphStyle[Math.floor(Math.random() * 5)]}
+                                series={salesByCountry["data_stats"]}
+                                type="area"
+                              />
+                            </div>
                           </div>
                         </div>
-                        <div className="col-6">
-                          <h5 className="mb-0">862</h5>
-                        </div>
-                        <div className="col-12">
-                          <div id="chart-europe">
-                            <Chart
-                              options={globalVariable.optionsEurope}
-                              series={globalVariable.seriesEurope}
-                              type="area"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
+                      ))}
+                      {/* <div className="row">
                         <div className="col-6">
                           <div className="d-flex align-items-center">
                             <svg
@@ -192,13 +242,13 @@ function DashboardPage() {
                         <div className="col-12">
                           <div id="chart-indonesia">
                             <Chart
-                              options={globalVariable.optionsIndonesia}
+                              options={globalVariable.optionsCountries}
                               series={globalVariable.seriesEurope}
                               type="area"
                             />
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -261,47 +311,31 @@ function DashboardPage() {
                 <div className="card-body py-4 px-5">
                   <div className="d-flex align-items-center">
                     <div className="avatar avatar-xl">
-                      <img src="/assets/images/faces/1.jpg" alt="Face 1" />
+                      <img src={dashboardInfo.user_in_session && (dashboardInfo.user_in_session.image.length <= 0 ? "/assets/images/faces/1.jpg" : `${process.env.REACT_APP_IMAGE_USER}/${dashboardInfo.user_in_session.image}`)} alt="User" />
                     </div>
                     <div className="ms-3 name">
-                      <h5 className="font-bold">John Duck</h5>
-                      <h6 className="text-muted mb-0">@johnducky</h6>
+                      <h5 className="font-bold">{dashboardInfo.user_in_session && dashboardInfo.user_in_session.username}</h5>
+                      <a href={`mailto:${dashboardInfo.user_in_session && dashboardInfo.user_in_session.email}`}><h6 className="text-muted mb-0">@{dashboardInfo.user_in_session && dashboardInfo.user_in_session.username}</h6></a>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="card">
                 <div className="card-header">
-                  <h4>Recent Messages</h4>
+                  <h4>Recent Customers</h4>
                 </div>
                 <div className="card-content pb-4">
-                  <div className="recent-message d-flex px-4 py-3">
-                    <div className="avatar avatar-lg">
-                      <img src="/assets/images/faces/1.jpg" />
+                  {dashboardInfo.recent_customers && dashboardInfo.recent_customers.map(recent_customer => (
+                    <div className="recent-message d-flex px-4 py-3">
+                      <div className="avatar avatar-lg">
+                        <img src={recent_customer.image.length <= 0 ? "/assets/images/faces/1.jpg" : `${process.env.REACT_APP_IMAGE_CUSTOMER}/${recent_customer.image}`} />
+                      </div>
+                      <div className="name ms-4">
+                        <h5 className="mb-1">{recent_customer.first_name}</h5>
+                        <a href={`mailto:${recent_customer.email}`}><h6 className="text-muted mb-0">@{recent_customer.first_name}</h6></a>
+                      </div>
                     </div>
-                    <div className="name ms-4">
-                      <h5 className="mb-1">Hank Schrader</h5>
-                      <h6 className="text-muted mb-0">@johnducky</h6>
-                    </div>
-                  </div>
-                  <div className="recent-message d-flex px-4 py-3">
-                    <div className="avatar avatar-lg">
-                      <img src="/assets/images/faces/1.jpg" />
-                    </div>
-                    <div className="name ms-4">
-                      <h5 className="mb-1">Dean Winchester</h5>
-                      <h6 className="text-muted mb-0">@imdean</h6>
-                    </div>
-                  </div>
-                  <div className="recent-message d-flex px-4 py-3">
-                    <div className="avatar avatar-lg">
-                      <img src="/assets/images/faces/1.jpg" />
-                    </div>
-                    <div className="name ms-4">
-                      <h5 className="mb-1">John Dodol</h5>
-                      <h6 className="text-muted mb-0">@dodoljohn</h6>
-                    </div>
-                  </div>
+                  ))}
                   <div className="px-4">
                     <button className="btn btn-block btn-xl btn-light-primary font-bold mt-3">
                       Start Conversation
@@ -311,11 +345,11 @@ function DashboardPage() {
               </div>
               <div className="card">
                 <div className="card-header">
-                  <h4>Visitors Profile</h4>
+                  <h4>Subscriber Acceptance</h4>
                 </div>
                 <div className="card-body">
                   <div id="chart-visitors-profile">
-                    <Chart options={globalVariable.optionsVisitorsProfile} series={globalVariable.seriesVisitorsProfile} type="donut" />
+                    <Chart options={globalVariable.optionsSubscriberNumber} series={subscriberNumberSeries} type="donut" />
                   </div>
                 </div>
               </div>

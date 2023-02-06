@@ -8,6 +8,7 @@ import "./index.css";
 import axios from "axios"
 import { toggleAddressTabAction } from "../../../store/admin/action/addrTabAction";
 import AddressEditComponent from "../../component/address/addressEdit";
+import globalVariable from "../../variable";
 
 function CustomerEditPage() {
 
@@ -37,21 +38,29 @@ function CustomerEditPage() {
     var form = document.getElementById(form_name)
     var formData = new FormData(form);
 
-    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/edit/${params.customer_id}`, formData).then(response => {
+    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/edit/${params.customer_id}`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
       // window.location.assign("/admin/product");
+    }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
     })
 
   }
 
   useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/edit/${params.customer_id}`)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/edit/${params.customer_id}`,globalVariable.axiosConfig)
       .then(function (response) {
         setCustomerInfo(response.data.customer)
         setCustomerImage(`${process.env.REACT_APP_IMAGE_CUSTOMER}/${response.data.customer.image}`)
         setAddressItems(response.data.addresses)
         setCustomerGroups(response.data.customer_groups)
+        loadURLToInputFiled(`${process.env.REACT_APP_IMAGE_CUSTOMER}/${response.data.customer.image}`)
+        
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
       
       

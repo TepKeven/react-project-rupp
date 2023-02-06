@@ -6,6 +6,7 @@ import NavbarComponent from "../../component/navbar";
 import SidebarComponent from "../../component/sidebar";
 import "./index.css";
 import axios from "axios"
+import globalVariable from "../../variable";
 
 function OrderAddPage() {
 
@@ -46,9 +47,12 @@ function OrderAddPage() {
         
     formData.append("orderProducts",JSON.stringify(orderProducts))
 
-    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/order/new`, formData).then(response => {
+    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/order/new`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
       
+    }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
     })
 
   }
@@ -99,7 +103,7 @@ function OrderAddPage() {
 
   useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/order/new`)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/order/new`, globalVariable.axiosConfig)
       .then(function (response) {
         setCustomers(response.data.customers)
         setCustomerGroups(response.data.customer_groups)
@@ -110,6 +114,9 @@ function OrderAddPage() {
         setShipments(response.data.shipment)
         setOrderStatuses(response.data.order_status)
         setTaxClasses(response.data.tax_classes)
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
       
       

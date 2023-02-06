@@ -8,6 +8,7 @@ import "./index.css";
 import axios from "axios"
 import { toggleAddressTabAction } from "../../../store/admin/action/addrTabAction";
 import AddressAddComponent from "../../component/address/addressAdd";
+import globalVariable from "../../variable";
 
 function CustomerAddPage() {
 
@@ -35,18 +36,24 @@ function CustomerAddPage() {
     var form = document.getElementById(form_name)
     var formData = new FormData(form);
 
-    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/new`, formData).then(response => {
+    axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/new`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
       // window.location.assign("/admin/customer");
+    }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
     })
 
   }
 
   useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/new`)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/new`, globalVariable.axiosConfig)
       .then(function (response) {
         setCustomerGroups(response.data.customer_groups)
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
       
       

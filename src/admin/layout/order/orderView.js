@@ -6,6 +6,7 @@ import NavbarComponent from "../../component/navbar";
 import SidebarComponent from "../../component/sidebar";
 import "./index.css";
 import axios from "axios"
+import globalVariable from "../../variable";
 
 function OrderViewPage() {
 
@@ -32,7 +33,7 @@ function OrderViewPage() {
 
   useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/order/edit/${params.order_id}`)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/order/edit/${params.order_id}`, globalVariable.axiosConfig)
       .then(function (response) {
         setCustomers(response.data.customers)
         setCustomerGroups(response.data.customer_groups)
@@ -50,6 +51,9 @@ function OrderViewPage() {
         const myOrder = response.data.order
         setOrderCurrency(allCurrencies.find(currency => currency.currency_id == myOrder.currency_id).symbol_left)
         // console.log(response.data)
+      }).catch((error) => {
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
       
       
