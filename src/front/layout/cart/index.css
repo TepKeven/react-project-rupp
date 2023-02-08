@@ -1,0 +1,84 @@
+.container .item12 table {
+    margin: 10px auto;
+}
+.container .item12 table ,th ,td{
+  
+    border:1px solid gray;
+    padding: 8px 0px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.align-middle{
+    vertical-align: middle !important;
+    align-items: center;
+}
+.item12 table tr:first-child{
+    background-color: black !important;
+    color: white;
+}
+.item12 table tr td{
+    position: relative;
+    border:1px solid gray;
+    border-collapse: collapse;
+}
+.item12 table tr td .btn-remove{
+    width: 31px;
+    height: 31px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #D10024;
+    box-sizing: border-box;
+}
+.item12 table tr td .btn-remove i{
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
+.add-coupon{
+    padding: 20px;
+    /* border: 1px solid #EDF1FF; */
+    /* margin: 20px 0px; */
+}
+.add-coupon a{
+    text-decoration: none;
+    color:white !important;
+    background-color: #D10024;
+    padding: 10px;
+    display: inline-block;
+}
+.add-coupon a:hover{
+    color: white;
+}
+.quick-link span{
+    width: 100%;
+    float: left;
+    padding-bottom:10px;
+}
+.quick-link span a{
+    text-decoration: none;
+    color: black;
+}
+.item14{
+    background-color: #EDF1FF;
+}
+.Cart-table{
+    border: 1px solid white;
+    width: 100%;
+}
+.Cart-table tr:first-child{
+    background-color: black;
+    color: white;
+}
+.last-tr{
+    text-align: center;
+}
+.last-tr a{
+    background-color: #D10024;
+    color: white!important;
+    padding: 15px;
+    border-radius: 20px;
+    margin: auto;
+}

@@ -51,8 +51,8 @@ function OrderAddPage() {
       console.log(response.data)
       
     }).catch((error) => {
-        // console.log(error)
-        window.location.assign("/admin/login")
+        console.log(error)
+        // window.location.assign("/admin/login")
     })
 
   }

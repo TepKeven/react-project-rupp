@@ -2,8 +2,9 @@ import React from "react";
 
 function ProductComponent({product}) {
 
-  return (
-    <div className="product" key={product.id}>
+  if(product)
+    return (
+      <div className="product">
       <div className="product-img">
         <img src="/assets/images/products/product01.png" alt="" />
         <div className="product-label">

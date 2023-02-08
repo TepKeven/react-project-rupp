@@ -534,7 +534,7 @@ var globalVariable = {
     withCredentials: true,
     headers: {
         "Accept": "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/formdata"
     }
   }
 

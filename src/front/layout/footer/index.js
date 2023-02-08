@@ -1,11 +1,7 @@
 import React from "react";
-import "./index.css"
-
-function FooterComponent() {
+function FooterPage() {
     return (
-        <>
             <div>
-                {/* NEWSLETTER */}
                 <div id="newsletter" className="section">
                     {/* container */}
                     <div className="container">
@@ -128,11 +124,8 @@ function FooterComponent() {
                     </div>
                     {/* /bottom footer */}
                 </footer>
-                {/* /FOOTER */}
             </div>
-
-        </>
     )
 }
 
-export default FooterComponent;
+export default FooterPage;
