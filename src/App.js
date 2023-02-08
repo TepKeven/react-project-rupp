@@ -30,6 +30,7 @@ import LoginPage from "./admin/layout/auth/login";
 import SlideshowPage from "./admin/layout/slideshow";
 import SlideshowAddPage from "./admin/layout/slideshow/slideshowAdd";
 import SlideshowEditPage from "./admin/layout/slideshow/slideshowEdit";
+import NewsletterAddPage from "./admin/layout/newsletter";
 
 
 function App() {
@@ -84,6 +85,9 @@ function App() {
           <Route path="/admin/slideshow" element={<SlideshowPage />} />
           <Route path="/admin/slideshow/new" element={<SlideshowAddPage />} />
           <Route path="/admin/slideshow/edit/:slideshow_id" element={<SlideshowEditPage />} />
+
+          {/* Newsletter */}
+          <Route path="/admin/newsletter" element={<NewsletterAddPage />} />
       </Routes>
       {window.location.pathname.startsWith("/admin") ? null : <Footer/>}
     </BrowserRouter>

@@ -533,6 +533,7 @@ var globalVariable = {
   axiosConfig: {
     withCredentials: true,
     headers: {
+        "relative_url": window.location.pathname,
         "Accept": "application/json",
         "Content-Type": "application/json"
     }

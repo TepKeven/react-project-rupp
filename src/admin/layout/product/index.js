@@ -26,7 +26,7 @@ function ProductPage(){
       
       axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/product?start=${startIndex}&end=${endIndex}`, globalVariable.axiosConfig)
       .then(function (response) {
-        console.log(response.data)
+        // console.log(response.data)
         setProductFilters(response.data.products)
         setProductLength(response.data.length)
       })

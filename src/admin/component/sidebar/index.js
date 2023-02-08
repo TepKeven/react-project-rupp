@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios"
+import globalVariable from "../../variable";
 
 
 function SidebarComponent() {
@@ -13,7 +14,7 @@ function SidebarComponent() {
 
   useEffect(() => {
 
-    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/sidebar?start=${startIndex}&end=${endIndex}`)
+    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/sidebar?start=${startIndex}&end=${endIndex}`, globalVariable.axiosConfig)
       .then(function (response) {
           setDashboardItems(response.data.sidebar_items)
       }).catch((error) => {
@@ -51,7 +52,7 @@ function SidebarComponent() {
 
             {dashboardItems.map((dashboardItem, index) => (
               <li className={`sidebar-item ${dashboardItem.dashboard_item_id == sessionStorage.getItem("activeTab") ? "active" : ""}`} onClick={() => setActiveTab(dashboardItem.dashboard_item_id)}>
-                <a href={`${dashboardItem.href}?dashboard=${dashboardItem.dashboard_item_id}`} className="sidebar-link">
+                <a href={`${dashboardItem.href}`} className="sidebar-link">
                   <i className={dashboardItem.icon}></i>
                   <span>{dashboardItem.name}</span>
                 </a>

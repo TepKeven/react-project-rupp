@@ -49,8 +49,8 @@ function DashboardPage() {
         console.log(response.data.order_country_by_month)
 
       }).catch((error) => {
-        console.log(error)
-        // window.location.assign("/admin/login")
+        // console.log(error)
+        window.location.assign("/admin/login")
       })
       
   },[])
