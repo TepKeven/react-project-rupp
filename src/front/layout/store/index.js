@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 function StorePage() {
     const [ProductItem,setProductItem]= useState([
-        { id : 1 ,name: "MacBook" , old_price : 900.00 , new_price : 800.00 , img:"/assets/images/products/product01.png"},
-        { id : 2 ,name: "Headphone" , old_price: 400.00 , new_price : 300.00 , img: "/assets/images/products/product02.png"},
-        { id : 3 ,name: "MacBook" , old_price : 800.00 , new_price : 600.00 , img:"/assets/images/products/product01.png"}
-    ])
+        //  { id : 1 ,name: "MacBook" , old_price : 900.00 , new_price : 800.00 , img:"/assets/images/products/product01.png"},
+        //  { id : 2 ,name: "Headphone" , old_price: 400.00 , new_price : 300.00 , img: "/assets/images/products/product02.png"},
+        //  { id : 3 ,name: "MacBook" , old_price : 800.00 , new_price : 600.00 , img:"/assets/images/products/product01.png"}
+     ]);
+
+     useEffect(() => {
+        const fetchData = async () => {
+          const result = await axios.get("http://localhost:4000/api/product");
+          if(result.data !=null){
+            setProductItem(result.data.products);
+          }
+        };
+        fetchData();
+      }, []);
+
     return (
         <>
             <div>
@@ -227,16 +239,13 @@ function StorePage() {
                                         <li><a href="#"><i className="fa fa-th-list" /></a></li>
                                     </ul>
                                 </div>
-                                {/* /store top filter */}
-                                {/* store products */}
                                 <div className="row">
-                                    {/* product */}
                                     {ProductItem.map((ProductItem)=>{
                                         return(
                                             <div className="col-md-4 col-xs-6">
                                         <div className="product">
                                             <div className="product-img">
-                                                <img src={ProductItem.img} alt />
+                                                <img src={`${process.env.REACT_APP_IMAGE_PRODUCT}/${ProductItem.image}`} alt />
                                                 <div className="product-label">
                                                     <span className="sale">-30%</span>
                                                     <span className="new">NEW</span>
@@ -244,8 +253,10 @@ function StorePage() {
                                             </div>
                                             <div className="product-body">
                                                 <p className="product-category">Category</p>
-                                                <h3 className="product-name"><a href="#">{ProductItem.name}</a></h3>
-                                                <h4 className="product-price">${ProductItem.new_price} <del className="product-old-price">${ProductItem.old_price}</del></h4>
+                                                {ProductItem.product_description_assoc.map(product_description => (
+                                                    <h3 className="product-name"><a href="#">{product_description.name}</a></h3>
+                                                ))}
+                                                <h4 className="product-price">${ProductItem.price} <del className="product-old-price">${ProductItem.old_price}</del></h4>
                                                 <div className="product-rating">
                                                     <i className="fa fa-star" />
                                                     <i className="fa fa-star" />
@@ -290,6 +301,7 @@ function StorePage() {
                 </div>
                 {/* /SECTION */}
             </div>
+            
         </>
     )
 }

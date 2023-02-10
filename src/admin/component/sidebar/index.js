@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios"
+import globalVariable from "../../variable";
 
 
 function SidebarComponent() {
@@ -13,7 +14,7 @@ function SidebarComponent() {
 
   useEffect(() => {
 
-    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/sidebar?start=${startIndex}&end=${endIndex}`)
+    axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/sidebar?start=${startIndex}&end=${endIndex}`,globalVariable.axiosConfig)
       .then(function (response) {
           setDashboardItems(response.data.sidebar_items)
       }).catch((error) => {
