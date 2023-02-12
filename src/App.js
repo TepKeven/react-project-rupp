@@ -35,7 +35,10 @@ import NewsletterAddPage from "./admin/layout/newsletter";
 import CheckoutPage from './front/layout/checkout';
 import CartPage from './front/layout/cart';
 import StorePage from './front/layout/store';
-import ProductComponent from "./front/component/product";
+import FrontRegisterPage from "./front/layout/register";
+import FrontLoginPage from './front/layout/login';
+import ProfilePage from "./front/layout/profile";
+import FrontProductPage from "./front/layout/product";
 
 function App() {
   return (
@@ -45,14 +48,16 @@ function App() {
 
           {/* Front Side */}
           <Route path="/" element={<Homepage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/shop" element={<StorePage />} />
-          <Route path="/product" element={<ProductComponent />} />
-          
-
+          <Route path="about" element={<AboutPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="shop" element={<StorePage />} />
+          <Route path="login" element={<FrontLoginPage />} />
+          <Route path="register" element={<FrontRegisterPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="product" element={<FrontProductPage />} />
+      
           {/* Admin Side */}
 
           {/* Login */}

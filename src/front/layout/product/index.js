@@ -1,6 +1,6 @@
 import React from "react";
 import ProductComponent from "../../component/product";
-function ProductPage() {
+function ForntProductPage() {
     return (
         <div>
             {/* BREADCRUMB */}
@@ -370,4 +370,4 @@ function ProductPage() {
 
     )
 }
-export default ProductPage;
+export default ForntProductPage;

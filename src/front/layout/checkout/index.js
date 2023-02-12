@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import globalVariable from "../../variable";
 import "./index.css"
 
 function CheckoutPage() {
@@ -16,7 +17,7 @@ function CheckoutPage() {
         const formdata = new FormData();
         formdata.append("cart_items", localStorage.getItem("cart_items") || '[]');
 
-        axios.post(`${process.env.REACT_APP_API_ROOT}/api/order/new/get`, formdata)
+        axios.post(`${process.env.REACT_APP_API_ROOT}/api/order/new/get`, formdata, globalVariable.axiosConfig)
         .then(function (response) {
             
             console.log(response.data)

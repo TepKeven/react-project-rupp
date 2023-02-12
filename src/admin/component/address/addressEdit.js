@@ -6,7 +6,7 @@ function AddressEditComponent({address = {}, addressIndex = 0}){
     const getAddrTab = useSelector((state) => state.getAddrTab);
 
     return (
-        <div key={`address-${addressIndex}`} className={"row m-0 " + (getAddrTab == `#customer_address_${addressIndex}` ? "" : "d-none" )} id={`customer_address_${addressIndex}`} >
+        <div key={`address-${addressIndex}`} className={"row m-0 " + (getAddrTab === `#customer_address_${addressIndex}` ? "" : "d-none" )} id={`customer_address_${addressIndex}`} >
             <div class="mb-4">
                 <label for={`address_firstname_${addressIndex}`} class="form-label">
                     First Name

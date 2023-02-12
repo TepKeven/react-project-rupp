@@ -214,8 +214,7 @@ function StorePage() {
                 {/* /container */}
             </div>
             {/* /SECTION */}
-        </div>
-        
+        </div>   
     )
 }
 export default StorePage;
