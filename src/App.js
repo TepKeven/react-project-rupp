@@ -1,5 +1,7 @@
 import React from "react";
 import './App.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import NavBar from './front/component/navbar';
 import Homepage from './front/layout/home';
@@ -55,8 +57,8 @@ function App() {
           <Route path="shop" element={<StorePage />} />
           <Route path="login" element={<FrontLoginPage />} />
           <Route path="register" element={<FrontRegisterPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="product" element={<FrontProductPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+          <Route path="product/:product_id" element={<FrontProductPage />} />
       
           {/* Admin Side */}
 
@@ -104,6 +106,7 @@ function App() {
           <Route path="/admin/newsletter" element={<NewsletterAddPage />} />
       </Routes>
       {window.location.pathname.startsWith("/admin") ? null : <FooterComponent/>}
+      <ToastContainer />
     </BrowserRouter>
   );
 }

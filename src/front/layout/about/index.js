@@ -5,7 +5,7 @@ function AboutPage() {
     return (
         <div>
             <div className="big-img-box">
-                <img src="img/bg-01.jpg" alt />
+                <img src="/assets/images/banners/banner1.jpg" alt />
                 <h1>About Us</h1>
             </div>
             <div className="container" style={{marginTop:50}}>

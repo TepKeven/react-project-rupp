@@ -4,6 +4,7 @@ import axios from "axios";
 import "./index.css";
 
 function SlideshowComponent() {
+  
   const [slideshowItems, setSlideshowItems] = useState([
     // {
     //   id: 1,
@@ -51,11 +52,11 @@ function SlideshowComponent() {
             <img
               className="d-block w-100"
               src={`${process.env.REACT_APP_IMAGE_SLIDESHOW}/${slideshowItem.image}`}
-              alt="First slide"
+              alt={slideshowItem.title}
             />
             <Carousel.Caption className="slideshow-caption text-end w-25">
               <h1 className="caption-title">{slideshowItem.title}</h1>
-              <p className="caption-description text-dark" dangerouslySetInnerHTML={{ __html: slideshowItem.descriptipn }} />
+              <p className="caption-description text-dark" dangerouslySetInnerHTML={{ __html: slideshowItem.description }} />
             </Carousel.Caption>
           </Carousel.Item>
         );

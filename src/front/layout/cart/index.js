@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toastNotificationError, toastNotificationSuccess } from "../../functions";
 import globalVariable from "../../variable";
 import "./index.css";
 
@@ -22,6 +23,7 @@ function CartPage() {
           setCartItems(response.data.carts)
       }).catch((error) => {
         console.log(error)
+        toastNotificationError(error.response.statusText)
         // window.location.assign("/admin/login")
       })
 
@@ -35,7 +37,8 @@ function CartPage() {
         const cart_items = cartItems.filter(cartItem => cartItem.product_id != product_id)
         
         setCartItems(cart_items)
-        localStorage.setItem("cart_items", JSON.stringify(local_cart_items_remain))   
+        localStorage.setItem("cart_items", JSON.stringify(local_cart_items_remain))  
+        toastNotificationSuccess("Cart Item Deleted Successfully") 
     }
 
     return (

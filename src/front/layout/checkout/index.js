@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toastNotificationError, toastNotificationSuccess } from "../../functions";
 import globalVariable from "../../variable";
 import "./index.css"
 
@@ -47,10 +48,12 @@ function CheckoutPage() {
         axios.post(`${process.env.REACT_APP_API_ROOT}/api/order/new`, formData).then(response => {
         
             console.log(response.data)
+            toastNotificationSuccess("Checkout Successfully")
         
         }).catch((error) => {
-            // console.log(error)
-            window.location.reload();
+            console.log(error)
+            toastNotificationError(error.response.statusText)
+            // window.location.reload();
         })
     }
 

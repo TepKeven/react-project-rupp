@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import { toastNotificationError, toastNotificationSuccess } from "../../functions";
 import "./index.css";
 
 function ContactPage() {
@@ -14,11 +15,12 @@ function ContactPage() {
         axios.post(`${process.env.REACT_APP_API_ROOT}/api/contact`, formData)
         .then(function (response) {
             
-            console.log(response.data)    
+            console.log(response.data)
+            toastNotificationSuccess("Email Sent Successfully")    
 
         }).catch((error) => {
             console.log(error)
-            window.location.reload();
+            toastNotificationError(error.response.statusText)
         })
     
     }

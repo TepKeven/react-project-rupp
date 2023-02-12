@@ -4,7 +4,7 @@
 }
 .big-img-box{
     width: 100%;
-    height: 239px;
+    height: 550px;
     position: relative;
 }
 .big-img-box img{
@@ -13,7 +13,7 @@
 }
 .big-img-box h1{
     position: absolute;
-    top: 35%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%,-50%);
     color: white;

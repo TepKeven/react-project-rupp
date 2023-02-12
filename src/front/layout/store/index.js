@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductComponent from "../../component/product";
 import globalVariable from "../../../admin/variable";
+import { toastNotificationSuccess } from "../../functions";
 
 function StorePage() {
 
@@ -24,6 +25,10 @@ function StorePage() {
     ])
 
     useEffect(() => {
+
+        if(params.get("success")){
+            toastNotificationSuccess(params.get("success"))
+        }
       
         axios.get(`${process.env.REACT_APP_API_ROOT}/api/store?start=${startIndex}&end=${endIndex}`, globalVariable.axiosConfig)
         .then(function (response) {
@@ -54,7 +59,7 @@ function StorePage() {
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">All Categories</a></li>
                                 <li><a href="#">Accessories</a></li>
-                                <li className="active">Headphones (227,490 Results)</li>
+                                {/* <li className="active">Headphones (227,490 Results)</li> */}
                             </ul>
                         </div>
                     </div>

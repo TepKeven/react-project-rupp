@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toastNotificationError } from "../../functions";
 import globalVariable from "../../variable";
 
 
@@ -20,11 +21,12 @@ function FrontRegisterPage() {
       localStorage.setItem("customer_login_token",response.data.customer_login_token)
       localStorage.setItem("currency", response.data.currency)
       localStorage.setItem("language",response.data.language)
-      // window.location.assign("/shop");
+      window.location.assign(`/shop?success=${response.data.message}`);
 
     }).catch((error) => {
         console.log(error)
         // window.location.assign("/login")
+        toastNotificationError(error.response.data.message)
     })
 
   }

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductComponent from "../../component/product";
 import SlideshowComponent from "../../component/slideshow";
+import { toastNotificationError } from "../../functions";
 import "./index.css"
 
 
@@ -27,8 +28,8 @@ function Homepage(){
 			setRecentProducts(response.data.recent_products)            
 
         }).catch((error) => {
-            console.log(error)
-            window.location.reload();
+            // console.log(error)
+            toastNotificationError(error.response.statusText || "Errors. Please try again.")
         })
 
 	},[])
