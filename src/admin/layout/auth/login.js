@@ -23,7 +23,7 @@ function LoginPage(){
           console.log(response.data)
           window.location.assign("/admin/dashboard");
         }).catch((error) => {
-            console.log(error)
+            // console.log(error)
             window.location.assign("/admin/login")
         })
     

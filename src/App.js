@@ -5,7 +5,7 @@ import NavBar from './front/component/navbar';
 import Homepage from './front/layout/home';
 import AboutPage from './front/layout/about';
 import ContactPage from './front/layout/contact';
-import Footer from './front/component/footer';
+import FooterComponent from './front/component/footer';
 import DashboardPage from './admin/layout/dashboard';
 import CategoryPage from "./admin/layout/category";
 import CategoryEditPage from "./admin/layout/category/categoryEdit";
@@ -32,6 +32,10 @@ import SlideshowAddPage from "./admin/layout/slideshow/slideshowAdd";
 import SlideshowEditPage from "./admin/layout/slideshow/slideshowEdit";
 import NewsletterAddPage from "./admin/layout/newsletter";
 
+import CheckoutPage from './front/layout/checkout';
+import CartPage from './front/layout/cart';
+import StorePage from './front/layout/store';
+import ProductComponent from "./front/component/product";
 
 function App() {
   return (
@@ -41,8 +45,13 @@ function App() {
 
           {/* Front Side */}
           <Route path="/" element={<Homepage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="contact" element={<ContactPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/shop" element={<StorePage />} />
+          <Route path="/product" element={<ProductComponent />} />
+          
 
           {/* Admin Side */}
 
@@ -89,7 +98,7 @@ function App() {
           {/* Newsletter */}
           <Route path="/admin/newsletter" element={<NewsletterAddPage />} />
       </Routes>
-      {window.location.pathname.startsWith("/admin") ? null : <Footer/>}
+      {window.location.pathname.startsWith("/admin") ? null : <FooterComponent/>}
     </BrowserRouter>
   );
 }

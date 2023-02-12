@@ -535,7 +535,7 @@ var globalVariable = {
     headers: {
         "relative_url": window.location.pathname,
         "Accept": "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/formdata"
     }
   }
 

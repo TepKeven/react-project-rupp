@@ -22,7 +22,7 @@ function NewsletterAddPage() {
       // window.location.assign("/admin/customer");
     }).catch((error) => {
         console.log(error)
-        // window.location.assign("/admin/login")
+        window.location.assign("/admin/dashboard")
     })
 
   }

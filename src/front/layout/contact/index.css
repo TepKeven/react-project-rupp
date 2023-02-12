@@ -1,0 +1,45 @@
+.message-box{
+    width: 50%;
+    height: 560px;
+    /* background-color: pink; */
+    float:left;
+    border: 2px solid #b8b6b6; ;
+    box-sizing: border-box;
+}
+.border{
+    border: 1px solid black;
+}
+.info-box{
+    width: 50%;
+    height: 560px;
+    /* background-color: orange; */
+    float:left;
+    border: 2px solid #b8b6b6; 
+    box-sizing: border-box;
+}
+.container-inside{
+    /* background-color: yellow; */
+    width: 70%;
+    margin: 50px auto;
+    height: 480px;
+    text-align: center;
+}
+.container-inside input{
+    padding: 10px;
+    border-radius: 100px;
+    border: 1px solid ;
+    border: 2px solid #b8b6b6;
+}
+.container-inside a{
+    text-decoration: none;
+    display: inline-block;
+    color:white !important;
+    background-color: black;
+    padding: 10px 20px;
+    width: 200px;
+    border-radius: 100px;
+}
+.container-inside .margin{
+    margin: 30px;
+    float: left ;
+}
