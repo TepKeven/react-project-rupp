@@ -70,7 +70,7 @@ function OrderPage(){
       axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/order/delete`,{
         "order_ids" : deleteIDs
       }, 
-        globalVariable.axiosConfig
+        globalVariable.axiosConfigJson
       )
       .then(function (response) {
         console.log(response.data)

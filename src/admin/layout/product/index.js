@@ -70,14 +70,14 @@ function ProductPage(){
       axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/product/delete`,{
         "product_ids" : deleteIDs
       }, 
-        globalVariable.axiosConfig
+        globalVariable.axiosConfigJson
       )
-      .then(function (response) {
+    .then(function (response) {
         console.log(response.data)
         // window.location.assign("/admin/product")
       }).catch((error) => {
         // console.log(error)
-        window.location.assign("/admin/login")
+        // window.location.assign("/admin/login")
       })
     }
 

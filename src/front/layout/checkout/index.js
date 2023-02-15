@@ -43,7 +43,7 @@ function CheckoutPage() {
         var formData = new FormData(form);
     
         formData.append("cart_items", localStorage.getItem("cart_items") || '[]');
-        formData.append("order_create_account", order_create_account.checked == true ? 1 : 0)
+        formData.append("order_create_account", (order_create_account != null &&  order_create_account.checked == true) ? 1 : 0)
 
         axios.post(`${process.env.REACT_APP_API_ROOT}/api/order/new`, formData).then(response => {
         

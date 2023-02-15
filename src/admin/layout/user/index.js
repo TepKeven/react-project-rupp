@@ -68,7 +68,7 @@ function UserPage(){
 
       axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/user/delete`,{
         "user_ids" : deleteIDs
-      }, globalVariable.axiosConfig)
+      }, globalVariable.axiosConfigJson)
       .then(function (response) {
         console.log(response.data)
         // window.location.assign("/admin/user")

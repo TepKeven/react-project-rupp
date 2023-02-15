@@ -24,7 +24,7 @@ function UserRolePage(){
     
     useEffect(() => {
       
-      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/userrole?start=${startIndex}&end=${endIndex}`, globalVariable.axiosConfig)
+      axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/userrole?start=${startIndex}&end=${endIndex}`, globalVariable.axiosConfigJson)
       .then(function (response) {
         console.log(response.data)
         setUserRoleFilters(response.data.user_roles)

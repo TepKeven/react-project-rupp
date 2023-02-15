@@ -537,6 +537,15 @@ var globalVariable = {
         "Accept": "application/json",
         "Content-Type": "multipart/formdata"
     }
+  },
+
+  axiosConfigJson: {
+    withCredentials: true,
+    headers: {
+        "relative_url": window.location.pathname,
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }
   }
 
 };

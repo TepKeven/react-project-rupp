@@ -60,6 +60,7 @@ function ProductAddPage() {
         setManufacturerItems(response.data.manufacturers)
         setStockStatuses(response.data.stock_statuses)
         setTaxClasses(response.data.tax_classes)
+        window.location.assign("/admin/product");
       }).catch((error) => {
         // console.log(error)
         window.location.assign("/admin/login")

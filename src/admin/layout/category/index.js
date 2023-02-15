@@ -70,7 +70,7 @@ function CategoryPage(){
       axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/category/delete`,{
         "ids" : deleteIDs
       },
-        globalVariable.axiosConfig
+        globalVariable.axiosConfigJson
       )
       .then(function (response) {
         console.log(response.data)
