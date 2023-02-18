@@ -116,7 +116,7 @@ function ProductPage(){
                           <td scope="row" className="text-center align-middle">{parseInt(startIndex) + index}</td> 
                           <td className="text-center align-middle"><img src={(product.image == "" || product.image == null) ? "/assets/images/no_image.png" : `${process.env.REACT_APP_IMAGE_PRODUCT}/${product.image}`} width="75"/></td>
                           <td className="text-center align-middle">{product.product_description_assoc[0].name}</td>
-                          <td className="text-center align-middle">{product.category_id}</td>
+                          <td className="text-center align-middle">{product.categories[0] != null ? product.categories[0].category_description_assoc[0].name : ""}</td>
                           <td className="text-center align-middle">{product.sort_order}</td>
                           <td className="text-center align-middle">
                           <a href={`/admin/product/edit/${product.product_id}`} title="Edit" class="btn btn-primary"><i class="fa fa-pencil"></i></a>

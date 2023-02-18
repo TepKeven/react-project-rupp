@@ -118,7 +118,7 @@ function OrderPage(){
                           <td className="text-center align-middle">{`${order.first_name} ${order.last_name}`}</td>
                           <td className="text-center align-middle">{orderStatuses.find(orderStatus => orderStatus.order_status_id == order.order_status_id).name || order.order_status_id}</td>
                           <td className="text-center align-middle">{`$ ${order.total}`}</td>
-                          <td className="text-center align-middle">{new Date(order.createdAt).toLocaleDateString}</td>
+                          <td className="text-center align-middle">{new Date(order.createdAt).toLocaleDateString()}</td>
                           <td className="text-center align-middle">{new Date(order.updatedAt).toLocaleDateString()}</td>
                           <td className="text-center align-middle">
                             <a href={`/admin/order/edit/${order.order_id}`} title="Edit" class="btn btn-primary me-2"><i class="fa fa-pencil"></i></a>
