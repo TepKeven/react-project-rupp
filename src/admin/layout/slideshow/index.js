@@ -71,7 +71,7 @@ function SlideshowPage(){
       }, globalVariable.axiosConfigJson )
       .then(function (response) {
         console.log(response.data)
-        // window.location.assign("/admin/slideshow")
+        window.location.assign("/admin/slideshow")
       }).catch((error) => {
         // console.log(error)
         window.location.assign("/admin/login")

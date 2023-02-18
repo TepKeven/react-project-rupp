@@ -73,7 +73,7 @@ function CustomerPage(){
       )
       .then(function (response) {
         console.log(response.data)
-        // window.location.assign("/admin/customer")
+        window.location.assign("/admin/customer")
       }).catch((error) => {
         // console.log(error)
         window.location.assign("/admin/login")

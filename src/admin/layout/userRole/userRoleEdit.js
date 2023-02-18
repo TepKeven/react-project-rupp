@@ -17,7 +17,7 @@ function UserRoleEditPage() {
   var params = useParams();
   
 
-  const addUserRole = () =>  {
+  const editUserRole = () =>  {
 
     var form = document.getElementById(form_name)
     var formData = new FormData(form);
@@ -80,9 +80,9 @@ function UserRoleEditPage() {
       <div id="main">
         <NavbarComponent />
         <div className="page-heading d-flex align-items-center justify-content-between">
-          <h3>Add User Role</h3>
+          <h3>Edit User Role</h3>
           <div class="pull-right">
-            <button onClick={addUserRole} data-toggle="tooltip" title="" class="btn btn-primary me-2" data-original-title="Save"><i class="fa fa-save"></i></button>
+            <button onClick={editUserRole} data-toggle="tooltip" title="" class="btn btn-primary me-2" data-original-title="Save"><i class="fa fa-save"></i></button>
             <a href="/admin/user" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
           </div>
         </div>

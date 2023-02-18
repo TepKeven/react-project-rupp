@@ -71,7 +71,7 @@ function UserPage(){
       }, globalVariable.axiosConfigJson)
       .then(function (response) {
         console.log(response.data)
-        // window.location.assign("/admin/user")
+        window.location.assign("/admin/user")
       }).catch((error) => {
         // console.log(error)
         window.location.assign("/admin/login")

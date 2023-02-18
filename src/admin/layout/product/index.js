@@ -74,9 +74,9 @@ function ProductPage(){
       )
     .then(function (response) {
         console.log(response.data)
-        // window.location.assign("/admin/product")
+        window.location.assign("/admin/product")
       }).catch((error) => {
-        // console.log(error)
+        console.log(error)
         // window.location.assign("/admin/login")
       })
     }
