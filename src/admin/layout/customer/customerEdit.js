@@ -40,7 +40,7 @@ function CustomerEditPage() {
 
     axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/edit/${params.customer_id}`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
-      // window.location.assign("/admin/product");
+      window.location.assign("/admin/customer");
     }).catch((error) => {
         // console.log(error)
         window.location.assign("/admin/login")

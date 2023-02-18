@@ -164,7 +164,7 @@ function DashboardPage() {
                     </div>
                     <div className="card-body">
                       {Object.entries(salesByCountries).map(([key, salesByCountry], index) => (
-                        <div className="row">
+                        <div className="row mt-3">
                           <div className="col-6">
                             <div className="d-flex align-items-center">
                               <svg
@@ -180,7 +180,7 @@ function DashboardPage() {
                             </div>
                           </div>
                           <div className="col-6">
-                            <h5 className="mb-0">{salesByCountry["order_count"]}</h5>
+                            <h5 className="mb-0 mx-2">{salesByCountry["order_count"]}</h5>
                           </div>
                           <div className="col-12">
                             <div id="chart-europe">

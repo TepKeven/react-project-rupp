@@ -23,7 +23,7 @@ function UserAddPage() {
 
     axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/user/new`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
-      // window.location.assign("/admin/product");
+      window.location.assign("/admin/user");
     })
     .catch((error) => {
         // console.log(error)

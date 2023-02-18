@@ -7,6 +7,7 @@ import SidebarComponent from "../../component/sidebar";
 import axios from "axios"
 import globalVariable from "../../variable";
 import NewsletterTextEditorComponent from "../../component/newsletterTextEditor";
+import {toastNotificationSuccess} from "../../functions"
 
 function NewsletterAddPage() {
 
@@ -19,7 +20,7 @@ function NewsletterAddPage() {
 
     axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/newsletter/`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
-      // window.location.assign("/admin/customer");
+      toastNotificationSuccess("Newsletter Sent Successfully")
     }).catch((error) => {
         console.log(error)
         window.location.assign("/admin/dashboard")

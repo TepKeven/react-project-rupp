@@ -22,7 +22,7 @@ function SlideshowEditPage() {
 
     axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/slideshow/edit/${params.slideshow_id}`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
-      // window.location.assign("/admin/slideshow");
+      window.location.assign("/admin/slideshow");
     }).catch((error) => {
         console.log(error)
         // window.location.assign("/admin/login")

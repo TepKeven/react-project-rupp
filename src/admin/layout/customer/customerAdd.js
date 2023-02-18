@@ -38,7 +38,7 @@ function CustomerAddPage() {
 
     axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/new`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
-      // window.location.assign("/admin/customer");
+      window.location.assign("/admin/customer");
     }).catch((error) => {
         // console.log(error)
         window.location.assign("/admin/login")

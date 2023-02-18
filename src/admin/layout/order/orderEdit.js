@@ -50,6 +50,7 @@ function OrderEditPage() {
 
     axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/order/edit/${params.order_id}`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
+      window.location.assign("/admin/order")
       
     }).catch((error) => {
         // console.log(error)

@@ -49,6 +49,7 @@ function OrderAddPage() {
 
     axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/order/new`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
+      window.location.assign("/admin/order")
       
     }).catch((error) => {
         // console.log(error)
