@@ -44,7 +44,7 @@ function ProductAddPage() {
 
     axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/product/new`, formData, globalVariable.axiosConfig).then(response => {
       console.log(response.data)
-      // window.location.assign("/admin/product");
+      window.location.assign("/admin/product");
     }).catch((error) => {
       // console.log(error)
       window.location.assign("/admin/login")
@@ -60,7 +60,6 @@ function ProductAddPage() {
         setManufacturerItems(response.data.manufacturers)
         setStockStatuses(response.data.stock_statuses)
         setTaxClasses(response.data.tax_classes)
-        window.location.assign("/admin/product");
       }).catch((error) => {
         // console.log(error)
         window.location.assign("/admin/login")
