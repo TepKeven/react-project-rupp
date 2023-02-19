@@ -17,6 +17,7 @@ function CustomerAddPage() {
   const [addressItems,setAddressItems] = useState(0)
   const [customerImage, setCustomerImage] = useState("/assets/images/no_image.png")
   const [customerGroups,setCustomerGroups] = useState([])
+  const [countries, setCountries] = useState([])
   
   const sectionTabs = [
     {tabID: 1, name: "General", tabReference: "#tab-general"},
@@ -51,6 +52,7 @@ function CustomerAddPage() {
       axios.get(`${process.env.REACT_APP_API_ROOT}/api/admin/customer/new`, globalVariable.axiosConfig)
       .then(function (response) {
         setCustomerGroups(response.data.customer_groups)
+        setCountries(response.data.countries)
       }).catch((error) => {
         // console.log(error)
         window.location.assign("/admin/login")
@@ -210,7 +212,7 @@ function CustomerAddPage() {
                     <button type="button" className="btn btn-primary" onClick={openNewAddress}>Add new Address</button>
                 </div>
                 {Array.apply(null, {length: addressItems}).map((address, addressIndex) => (
-                    <AddressAddComponent addressIndex={addressIndex} key={`address-${addressIndex}`}/>
+                    <AddressAddComponent addressIndex={addressIndex} key={`address-${addressIndex}`} countries={countries}/>
                 ))}
             </div>
         </form>

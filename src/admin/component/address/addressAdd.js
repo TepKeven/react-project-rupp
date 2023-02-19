@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-function AddressAddComponent({addressIndex = 0}){
+function AddressAddComponent({addressIndex = 0, countries = []}){
 
     const getAddrTab = useSelector((state) => state.getAddrTab);
 
@@ -78,9 +78,9 @@ function AddressAddComponent({addressIndex = 0}){
                     Country
                 </label>
                 <select id={`address_country_${addressIndex}`} name={`address_description[${addressIndex}][country_id]`} class="form-control">
-                    <option value="0" selected="selected">--Please Select--</option>
-                    <option value="1">Cambodia</option>
-                    <option value="2">USA</option>
+                    {countries.map(country => (
+                        <option value={country.country_id}>{country.name}</option>
+                    ))}
                 </select>
             </div>
         </div>

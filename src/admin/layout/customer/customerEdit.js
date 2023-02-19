@@ -18,6 +18,8 @@ function CustomerEditPage() {
   const [customerImage, setCustomerImage] = useState("/assets/images/no_image.png")
   const [customerGroups,setCustomerGroups] = useState([])
   const [customerInfo, setCustomerInfo] = useState({})
+  const [countries, setCountries] = useState([])
+
   var params = useParams();
   
   const sectionTabs = [
@@ -56,6 +58,7 @@ function CustomerEditPage() {
         setCustomerImage(`${process.env.REACT_APP_IMAGE_CUSTOMER}/${response.data.customer.image}`)
         setAddressItems(response.data.addresses)
         setCustomerGroups(response.data.customer_groups)
+        setCountries(response.data.countries)
         loadURLToInputFiled(`${process.env.REACT_APP_IMAGE_CUSTOMER}/${response.data.customer.image}`)
         
       }).catch((error) => {
@@ -71,7 +74,7 @@ function CustomerEditPage() {
   }
 
   function openNewAddress(){
-    setAddressItems(addressItems + 1)
+    setAddressItems([...addressItems, {}])
   }
 
     // Get Image From URL then Render the URL to display it as a Value for input type file
@@ -106,7 +109,7 @@ function CustomerEditPage() {
       <div id="main">
         <NavbarComponent />
         <div className="page-heading d-flex align-items-center justify-content-between">
-          <h3>Add Customer</h3>
+          <h3>Edit Customer</h3>
           <div class="pull-right">
             <button onClick={editCustomer} data-toggle="tooltip" title="" class="btn btn-primary me-2" data-original-title="Save"><i class="fa fa-save"></i></button>
             <a href="/admin/customer" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
@@ -247,7 +250,7 @@ function CustomerEditPage() {
                     <button type="button" className="btn btn-primary" onClick={openNewAddress}>Add new Address</button>
                 </div>
                 {addressItems.map((address, addressIndex) => (
-                    <AddressEditComponent addressIndex={addressIndex} address={address} key={`address-${addressIndex}`}/>
+                    <AddressEditComponent addressIndex={addressIndex} address={address} key={`address-${addressIndex}`} countries={countries}/>
                 ))}
             </div>
         </form>
