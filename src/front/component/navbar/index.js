@@ -1,10 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { toastNotificationError, toastNotificationSuccess } from "../../functions";
 import globalVariable from "../../variable";
 import "./index.css"
 
 function TopNavbarComponent() {
+
+  const url = new URL(window.location)
+  const params = new URLSearchParams(url.search);
 
   const [dropdown,setDropdown] = useState(false)
 
@@ -116,13 +120,14 @@ function TopNavbarComponent() {
             </div>
             <div className="col-md-5">
               <div className="header-search">
-                <form>
-                  <select className="input-select">
+                <form action="/shop" method="GET">
+                  <select className="input-select" name="category">
                     <option value="0">All Categories</option>
-                    <option value="1">Category 01</option>
-                    <option value="1">Category 02</option>
+                    {categoryItems.map(categoryItem => (
+                      <option value={categoryItem.category_id}>{categoryItem.category_description_assoc[0].name}</option>
+                    ))}
                   </select>
-                  <input className="input" placeholder="Search here" />
+                  <input className="input" placeholder="Search here" id="search" name="search" defaultValue={params.get("search") == undefined ? "" : params.get("search")}/>
                   <button className="search-btn">Search</button>
                 </form>
               </div>

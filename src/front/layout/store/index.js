@@ -12,7 +12,8 @@ function StorePage() {
     const [startIndex,setStartIndex] = useState((params.get("start") == undefined || params.get("start") < 1) ? 1 : params.get("start"))
     const [endIndex, setEndIndex] = useState((params.get("end") == undefined || params.get("end") < params.get("start")) ? 20 : params.get("end"))
     const [pagination, setPagination] = useState(Math.floor((startIndex / perPage) + 1))
-
+    const searchParam = params.get("search") == undefined ? "" : params.get("search")
+    const categoryParam = params.get("category") == undefined ? 0 : params.get("category")
 
     const [categories, setCategories] = useState([])
     const [topSellings, setTopSellings] = useState([])
@@ -30,7 +31,7 @@ function StorePage() {
             toastNotificationSuccess(params.get("success"))
         }
       
-        axios.get(`${process.env.REACT_APP_API_ROOT}/api/store?start=${startIndex}&end=${endIndex}`, globalVariable.axiosConfig)
+        axios.get(`${process.env.REACT_APP_API_ROOT}/api/store?start=${startIndex}&end=${endIndex}&search=${searchParam}&category=${categoryParam}`, globalVariable.axiosConfig)
         .then(function (response) {
           console.log(response.data)
           setProductItems(response.data.products)

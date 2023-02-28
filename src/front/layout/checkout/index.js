@@ -1,10 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toastNotificationError, toastNotificationSuccess } from "../../functions";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import globalVariable from "../../variable";
 import "./index.css"
 
 function CheckoutPage() {
+
+    const initialPaypalOptions = {
+        "client-id": "AaeR8Td_b6gPaaoXouNNcGjjzjMfRgd0C5Uuq57oOtViapAVih93uzOI_ElNm4YOBcHPTyaDY7IiHLe1",
+        currency: "USD",
+        intent: "capture",
+    };
 
     const form_name = "form-order-new"
     const [countries, setCountries] = useState([]);
@@ -12,6 +19,7 @@ function CheckoutPage() {
     const [shipments, setShipments] = useState([])
     const [loginToken, setLoginToken] = useState(null)
     const [cartProducts, setCartProducts] = useState([])
+    const [paymentIDSelected, setPaymentIDSelected] = useState(1)
  
     useEffect(() => {
 
@@ -49,12 +57,17 @@ function CheckoutPage() {
         
             console.log(response.data)
             toastNotificationSuccess("Checkout Successfully")
+            localStorage.setItem("cart_items", "[]")
         
         }).catch((error) => {
             console.log(error)
             toastNotificationError(error.response.statusText)
             // window.location.reload();
         })
+    }
+
+    const setPaymentID = (payment_id) => {
+        setPaymentIDSelected(payment_id)
     }
 
     return (
@@ -282,7 +295,7 @@ function CheckoutPage() {
                                 </div>
                                 {payments.map((payment, index) => (
                                     <div className="input-radio">
-                                        <input type="radio" name="order_payment_id" id={`payment-${payment.payment_id}`} value={payment.payment_id} checked={index == 0}/>
+                                        <input type="radio" name="order_payment_id" id={`payment-${payment.payment_id}`} value={payment.payment_id} defaultChecked={index == 0} onChange={() => setPaymentID(payment.payment_id)}/>
                                         <label htmlFor={`payment-${payment.payment_id}`}>
                                             <span />
                                             {payment.name}
@@ -301,7 +314,7 @@ function CheckoutPage() {
                                 </div>
                                 {shipments.map((shipment, index) => (
                                     <div className="input-radio">
-                                        <input type="radio" name="order_shipping_id" id={`shipping-${shipment.shipping_id}`} value={shipment.shipping_id} checked={index == 0}/>
+                                        <input type="radio" name="order_shipping_id" id={`shipping-${shipment.shipping_id}`} value={shipment.shipping_id} defaultChecked={index == 0}/>
                                         <label htmlFor={`shipping-${shipment.shipping_id}`}>
                                             <span />
                                             {shipment.name}
@@ -319,7 +332,39 @@ function CheckoutPage() {
                                     I've read and accept the <a href="#">terms &amp; conditions</a>
                                 </label>
                             </div>
-                            <a href="#" className="primary-btn order-submit" onClick={addOrder}>Place order</a>
+                            {paymentIDSelected != 3 && (
+                                <a href="#" className="primary-btn order-submit" onClick={addOrder}>Place order</a>
+                            )}
+                            {paymentIDSelected == 3  && (
+                                <PayPalScriptProvider options={initialPaypalOptions}>
+                                    <PayPalButtons className="order-submit" style={{ color: "black", shape: 'pill',height: 48 }} 
+                                        createOrder= {(data, actions) => {
+                                            return actions.order
+                                                .create({
+                                                    purchase_units: [
+                                                        {
+                                                            amount: {
+                                                                currency_code: "USD",
+                                                                value: cartProducts.reduce((total,product) => (parseFloat(product.price) + parseFloat(product.tax)) * parseFloat(product.purchase_quantity) + total ,0),
+                                                            },
+                                                        },
+                                                    ],
+                                                })
+                                                .then((orderId) => {
+                                                    // Your code here after create the order
+                                                    console.log(orderId)
+                                                    return orderId;
+                                                });
+                                        }}
+                                        onApprove={function (data, actions) {
+                                            return actions.order.capture().then(function (details) {
+                                                console.log(details)
+                                                addOrder()
+                                            });
+                                        }}
+                                    />
+                                </PayPalScriptProvider>
+                            )}
                         </div>
                         {/* /Order Details */}
                     </div>

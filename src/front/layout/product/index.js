@@ -142,8 +142,7 @@ function ForntProductPage() {
                                         </h3>
                                         <span className="product-available">{productInfo.stock_status}</span>
                                     </div>
-                                    <p className="text-justify">
-                                    {productInfo.product_description_assoc && productInfo.product_description_assoc[0].description.substring(0,350)}
+                                    <p className="text-justify" dangerouslySetInnerHTML={{__html: productInfo.product_description_assoc && productInfo.product_description_assoc[0].description.replace(/&lt;/g, "<").replace(/&gt;/g, ">").substring(0,350) }}>
                                     </p>
                                     {/* <div className="product-options">
                                         <label>
@@ -205,8 +204,7 @@ function ForntProductPage() {
                                         <div id="tab1" className="tab-pane active">
                                             <div className="row">
                                                 <div className="col-md-12">
-                                                    <p className="text-justify">
-                                                        {productInfo.product_description_assoc && productInfo.product_description_assoc[0].description}
+                                                    <p className="text-justify" dangerouslySetInnerHTML={{__html: productInfo.product_description_assoc && productInfo.product_description_assoc[0].description.replace(/&lt;/g, "<").replace(/&gt;/g, ">") }}>               
                                                     </p>
                                                 </div>
                                             </div>
