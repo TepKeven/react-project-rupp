@@ -10,11 +10,11 @@ function Homepage(){
     
 	const [homeProducts, setHomeProducts] = useState([
 
-		{product_id: 0, viewed: 0, price: "250.0000", tax_price: 1980, image: "1674622844590.png",  product_description_assoc: [{name: "jello"}] },
-		{product_id: 0, viewed: 1, price: "260.0000", tax_price: 2980, image: "1674625091843.png", product_description_assoc: [{name: "jello"}] },
-		{product_id: 0, viewed: 2, price: "270.0000", tax_price: 3980, image: "1674622844590.png", product_description_assoc: [{name: "jello"}] },
-		{product_id: 0, viewed: 3,  price: "280.0000", tax_price: 4980, image: "1674625091843.png", product_description_assoc: [{name: "jello"}] },
-		{product_id: 0, viewed: 4,  price:"290.0000", tax_price: 5980, image: "1674622844590.png", product_description_assoc: [{name: "jello"}] },
+		{product_id: 0, viewed: 0, price: "250.0000", tax_price: 1980, image: "1674622844590.png",  product_description_assoc: [{name: "Product 1"}] },
+		{product_id: 0, viewed: 1, price: "260.0000", tax_price: 2980, image: "1674625091843.png", product_description_assoc: [{name: "Product 1"}] },
+		{product_id: 0, viewed: 2, price: "270.0000", tax_price: 3980, image: "1674622844590.png", product_description_assoc: [{name: "Product 1"}] },
+		{product_id: 0, viewed: 3,  price: "280.0000", tax_price: 4980, image: "1674625091843.png", product_description_assoc: [{name: "Product 1"}] },
+		{product_id: 0, viewed: 4,  price:"290.0000", tax_price: 5980, image: "1674622844590.png", product_description_assoc: [{name: "Product 1"}] },
 	])
 
 	const [recentProducts, setRecentProducts] = useState([])
@@ -29,7 +29,7 @@ function Homepage(){
 
         }).catch((error) => {
             // console.log(error)
-            toastNotificationError(error.response.statusText || "Errors. Please try again.")
+            toastNotificationError(error.response.statusText == undefined ? "Errors. Please try again." : error.response.statusText)
         })
 
 	},[])

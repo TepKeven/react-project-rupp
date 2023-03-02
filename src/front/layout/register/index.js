@@ -1,14 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toastNotificationError } from "../../functions";
+import { toastNotificationError, toastNotificationSuccess } from "../../functions";
 import globalVariable from "../../variable";
+import {Button, Modal} from "react-bootstrap"
+import "./index.css"
 
 
 function FrontRegisterPage() {
 
   const form_name = "form-customer-login"
+  const otp_form = "form-otp-verify"
   const [customerImage, setCustomerImage] = useState("/assets/images/no_image.png")
   const [countries, setCountries] = useState([])
+  const [modalLgShow, setModalLgShow] = useState(false);
+  const [emailInput, setEmailInput] = useState("");
 
   const setRegister = () =>  {
 
@@ -21,6 +26,33 @@ function FrontRegisterPage() {
       localStorage.setItem("customer_login_token",response.data.customer_login_token)
       localStorage.setItem("currency", response.data.currency)
       localStorage.setItem("language",response.data.language)
+      toastNotificationSuccess(response.data.message)
+      setModalLgShow(true)
+      // window.location.assign(`/shop?success=${response.data.message}`);
+
+    }).catch((error) => {
+        console.log(error)
+        // window.location.assign("/login")
+        toastNotificationError(error.response.data.message)
+    })
+
+  }
+
+  const verifyOTP = () => {
+
+    const OTPInputs =  document.querySelectorAll("input[name='customer_otp[]']")
+    const OTPDigits = []
+    for(let OTPInput of OTPInputs){
+      OTPDigits.push(OTPInput.value)
+    }
+
+    const OTPCode = OTPDigits.join("");
+    const formdata = new FormData();
+    formdata.append("otp_code", OTPCode || "");
+    
+    axios.post(`${process.env.REACT_APP_API_ROOT}/api/verifyotp/`, formdata, globalVariable.axiosConfig).then(response => {
+
+      console.log(response.data)
       window.location.assign(`/shop?success=${response.data.message}`);
 
     }).catch((error) => {
@@ -29,6 +61,32 @@ function FrontRegisterPage() {
         toastNotificationError(error.response.data.message)
     })
 
+  }
+
+  const reSendOTPCode = () => {
+
+    const formdata = new FormData();
+    formdata.append("otp_email", emailInput || "");
+
+    axios.post(`${process.env.REACT_APP_API_ROOT}/api/getnewotp/`, formdata, globalVariable.axiosConfig).then(response => {
+
+      console.log(response.data)
+      toastNotificationSuccess(response.data.message)
+
+    }).catch((error) => {
+        console.log(error)
+        // window.location.assign("/login")
+        toastNotificationError(error.response.data.message)
+    })
+  }
+
+  const shiftFocus = (event) => {
+      event.target.blur()
+      event.target.nextSibling.focus()
+  }
+
+  const storeEmail = (event) => {
+    setEmailInput(event.target.value)
   }
 
   const chooseImage = (event) => {
@@ -73,7 +131,7 @@ function FrontRegisterPage() {
                 </div>
                 <div class="form-group mt-3">
                   <label for="customer_email">Email</label>
-                  <input type="text" class="form-control" name="customer_email" id="customer_email" placeholder="Your Email" />
+                  <input type="text" class="form-control" name="customer_email" id="customer_email" placeholder="Your Email" onChange={storeEmail}/>
                 </div>
                 <div class="form-group mt-3">
                   <label for="customer_password">Password</label>
@@ -155,6 +213,39 @@ function FrontRegisterPage() {
         {/* /container */}
       </div>
       {/* /SECTION */}
+  
+      <Modal
+        size="lg"
+        show={modalLgShow}
+        onHide={() => setModalLgShow(false)}
+        aria-labelledby="otp-modal-size-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="otp-modal-size-lg">
+            Verify Your OTP
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+              <div className="p-5">
+                <h3 className="text-center">OTP Confirmation</h3>
+                <p className="mt-3">
+                  Enter the code we just sent to your email address: {emailInput}
+                </p>
+                <form className="d-flex justify-content-around mx-0 mt-5" id={otp_form}>
+                  <input type="text" name="customer_otp[]" className="otp-form-control col-lg-2 col-3" autofocus={true} maxLength={1} onChange={shiftFocus}/>
+                  <input type="text" name="customer_otp[]" className="otp-form-control col-lg-2 col-3" maxLength={1} onChange={shiftFocus}/>
+                  <input type="text" name="customer_otp[]" className="otp-form-control col-lg-2 col-3" maxLength={1} onChange={shiftFocus}/>
+                  <input type="text" name="customer_otp[]" className="otp-form-control col-lg-2 col-3" maxLength={1}/>
+                </form>
+                <div className="d-flex justify-content-center mt-4">
+                  <a href="#" onClick={reSendOTPCode}>Re-Send Code</a>
+                </div>
+              </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className="btn btn-primary" onClick={verifyOTP}>Submit</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

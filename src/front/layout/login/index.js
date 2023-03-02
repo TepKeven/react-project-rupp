@@ -2,12 +2,38 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { toastNotificationError } from "../../functions";
 import globalVariable from "../../variable";
+import {
+  LoginSocialGoogle,
+  LoginSocialAmazon,
+  LoginSocialFacebook,
+  LoginSocialGithub,
+  LoginSocialInstagram,
+  LoginSocialLinkedin,
+  LoginSocialMicrosoft,
+  LoginSocialPinterest,
+  LoginSocialTwitter,
+  LoginSocialApple,
+  IResolveParams,
+} from 'reactjs-social-login';
+
+import {
+  FacebookLoginButton,
+  GoogleLoginButton,
+  GithubLoginButton,
+  AmazonLoginButton,
+  InstagramLoginButton,
+  LinkedInLoginButton,
+  MicrosoftLoginButton,
+  TwitterLoginButton,
+  AppleLoginButton,
+} from 'react-social-login-buttons';
 import "./index.css"
 
 const form_name = "form-customer-login"
 
 function FrontLoginPage() {
 
+  const REDIRECT_URI = 'http://localhost:3000/login';
   const url = new URL(window.location)
   const params = new URLSearchParams(url.search);
 
@@ -66,6 +92,23 @@ function FrontLoginPage() {
               </div>
             </div>
             <button type="button" class="btn btn-danger mt-5 w-100" onClick={setLogin}>Sign in</button>
+            <LoginSocialGoogle
+              client_id={process.env.REACT_APP_GG_APP_ID || ''}
+              // onLoginStart={onLoginStart}
+              redirect_uri={REDIRECT_URI}
+              scope="openid profile email"
+              discoveryDocs="claims_supported"
+              access_type="offline"
+              onResolve={({ provider, data }) => {
+                // setProvider(provider);
+                // setProfile(data);
+              }}
+              onReject={err => {
+                console.log(err);
+              }}
+            >
+              <GoogleLoginButton />
+            </LoginSocialGoogle>
           </form>
         </div>
       </div>
