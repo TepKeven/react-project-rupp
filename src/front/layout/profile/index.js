@@ -33,6 +33,23 @@ function ProfilePage() {
 
   },[])
 
+  const customerLogout = () => {
+
+    const formdata = new FormData();
+
+    axios.post(`${process.env.REACT_APP_API_ROOT}/api/logout`, formdata, globalVariable.axiosConfigJson)
+    .then(function (response) {
+        console.log(response.data)
+        window.location.assign("/")
+
+    }).catch((error) => {
+      console.log(error)
+      toastNotificationError("Error Logging out")
+      // window.location.assign("/admin/login")
+    })
+
+  }
+
 
   return (
     <>
@@ -81,6 +98,9 @@ function ProfilePage() {
                       <h5>{`${index + 1}. ${address.company}, ${address.address}, ${address.city}, ${address.postcode}, ${address.country}`}</h5><br/>
                     </div>
                   ))}
+                </div>
+                <div className="d-flex justify-content-center mt-3">
+                  <button className="btn btn-danger" onClick={customerLogout}>Logout</button>
                 </div>
               </div>
             </div>

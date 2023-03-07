@@ -45,7 +45,13 @@ function StorePage() {
           window.location.reload()
         })
           
-      },[])
+    },[perPage])
+
+    const updatePaginationSize = event => {
+        
+        setEndIndex(event.target.value)
+        setPerPage(event.target.value)
+    }
 
     return (
         <div>
@@ -58,8 +64,8 @@ function StorePage() {
                         <div className="col-md-12">
                             <ul className="breadcrumb-tree">
                                 <li><a href="#">Home</a></li>
-                                <li><a href="#">All Categories</a></li>
-                                <li><a href="#">Accessories</a></li>
+                                <li><a href="#">Shop</a></li>
+                                {/* <li><a href="#">Accessories</a></li> */}
                                 {/* <li className="active">Headphones (227,490 Results)</li> */}
                             </ul>
                         </div>
@@ -164,9 +170,14 @@ function StorePage() {
                                     </label>
                                     <label>
                                         Show:
-                                        <select className="input-select">
-                                            <option value={0}>20</option>
-                                            <option value={1}>50</option>
+                                        <select className="input-select" onChange={updatePaginationSize}>
+                                            <option value={productLength}>All Products</option>
+                                            <option value={3}>3</option>
+                                            <option value={9}>9</option>
+                                            <option value={27}>27</option>
+                                            <option value={39}>39</option>
+                                            <option value={48}>48</option>
+                                            <option value={60}>60</option>
                                         </select>
                                     </label>
                                 </div>

@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios"
 import globalVariable from "../../variable";
+import "./index.css"
+import { toastNotificationError, toastNotificationSuccess } from "../../../front/functions";
 
 
 function SidebarComponent() {
@@ -28,6 +30,23 @@ function SidebarComponent() {
     }
 
     const showSidebar = useSelector((state) => state.showSidebar);
+
+    const userLogout = () => {
+
+      const formdata = new FormData();
+
+      axios.post(`${process.env.REACT_APP_API_ROOT}/api/admin/logout`, formdata, globalVariable.axiosConfigJson)
+      .then(function (response) {
+          console.log(response.data)
+          window.location.assign("/")
+
+      }).catch((error) => {
+        console.log(error)
+        toastNotificationError("Error Logging out")
+        // window.location.assign("/admin/login")
+      })
+    
+    }
   
   return (
     <div id="sidebar" className={showSidebar == true ? "active" : ""}>
@@ -58,6 +77,13 @@ function SidebarComponent() {
                 </a>
               </li>
             ))}
+
+              <li className={`sidebar-item`} onClick={userLogout}>
+                <a href="#" className="sidebar-link">
+                  <i className="bi bi-person-fill"></i>
+                  <span>Logout</span>
+                </a>
+              </li>
 
             {/* <li className="sidebar-item  has-sub">
               <a href="/admin/category" className="sidebar-link">

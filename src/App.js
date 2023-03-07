@@ -41,6 +41,12 @@ import FrontRegisterPage from "./front/layout/register";
 import FrontLoginPage from './front/layout/login';
 import ProfilePage from "./front/layout/profile";
 import FrontProductPage from "./front/layout/product";
+import InformationPage from "./admin/layout/information";
+import InformationAddPage from "./admin/layout/information/informationAdd";
+import InformationEditPage from "./admin/layout/information/informationEdit";
+import FrontInformationPage from "./front/layout/information";
+import FrontCategoryPage from "./front/layout/category";
+import SettingPage from "./admin/layout/setting";
 
 function App() {
   return (
@@ -57,8 +63,10 @@ function App() {
           <Route path="shop" element={<StorePage />} />
           <Route path="login" element={<FrontLoginPage />} />
           <Route path="register" element={<FrontRegisterPage />} />
-        <Route path="profile" element={<ProfilePage />} />
+          <Route path="profile" element={<ProfilePage />} />
           <Route path="product/:product_id" element={<FrontProductPage />} />
+          <Route path="category/:category_id" element={<FrontCategoryPage />} />
+          <Route path="page/:page_id_name" element={<FrontInformationPage />} />
       
           {/* Admin Side */}
 
@@ -101,6 +109,14 @@ function App() {
           <Route path="/admin/slideshow" element={<SlideshowPage />} />
           <Route path="/admin/slideshow/new" element={<SlideshowAddPage />} />
           <Route path="/admin/slideshow/edit/:slideshow_id" element={<SlideshowEditPage />} />
+
+          {/* Information Pages */}
+          <Route path="/admin/information" element={<InformationPage />} />
+          <Route path="/admin/information/new" element={<InformationAddPage />} />
+          <Route path="/admin/information/edit/:page_id" element={<InformationEditPage />} />
+
+          {/* Setting Page */}
+          <Route path="/admin/setting" element={<SettingPage />} />
 
           {/* Newsletter */}
           <Route path="/admin/newsletter" element={<NewsletterAddPage />} />

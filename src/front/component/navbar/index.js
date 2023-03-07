@@ -19,15 +19,11 @@ function TopNavbarComponent() {
     // {id: 4, title: "Product 4", quantity: 2, price: 100.00,image: "/assets/images/products/product01.png"}
     
   ])
-  const [categoryItems, setCategoryItems] = useState([
-    // {id: 1, title: "Home", href: "#"},
-    // {id: 2, title: "Hot Deals", href: "#"},
-    // {id: 3, title: "Categories", href: "#"},
-    // {id: 4, title: "Laptops", href: "#"},
-    // {id: 5, title: "Smartphones", href: "#"},
-    // {id: 6, title: "Cameras", href: "#"},
-    // {id: 7, title: "Accessories", href: "#"},
+  const [informationPages, setInformationPages] = useState([
+    
   ])
+
+  const [categoryItems, setCategoryItems] = useState([])
 
   function toggleDropdown(){
 
@@ -46,6 +42,7 @@ function TopNavbarComponent() {
 
           console.log(response.data)
           setCartItems(response.data.carts)
+          setInformationPages(response.data.pages)
           setCategoryItems(response.data.categories)
 
 
@@ -198,11 +195,17 @@ function TopNavbarComponent() {
     <div className="container">
       <div id="responsive-nav">
         <ul className="main-nav nav">
-          {categoryItems.map((categoryItem) => {
+          <li><a href={`/`}>Home</a></li>
+          {informationPages.map((informationPage) => {
             return (
-              <li className={categoryItem.category_id == 1 ? "" : "" } key={categoryItem.category_id}><a href={"/shop"}>{categoryItem.category_description_assoc[0].name}</a></li>
+              <li className={informationPage.information_id == 1 ? "" : "" } key={informationPage.information_id}><a href={`/page/${informationPage.information_id}`}>{informationPage.information_description_assoc[0].name}</a></li>
             )
           })}
+          <li><a href={`/contact`}>Contact</a></li>
+          <li><a href={`/shop`}>Shop</a></li>
+          <li><a href={`/cart`}>Cart</a></li>
+          <li><a href={`/checkout`}>Checkout</a></li>
+          <li><a href={`/profile`}>My Account</a></li>
         </ul>
       </div>
     </div>

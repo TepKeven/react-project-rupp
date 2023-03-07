@@ -44,12 +44,21 @@ function ProductComponent({product}) {
             <h3 className="product-name">
               <a href="#">{product.product_description_assoc[0].name}</a>
             </h3>
-            <h4 className="product-price">
-              $ {(parseFloat(product.price) + parseFloat(product.tax_price)).toFixed(2)}{" "}
-              <del className="product-old-price">
-                $ {parseFloat(product.price).toFixed(2)}
-              </del>
-            </h4>
+            
+            {product.tax_price !=  0 && (
+              <h4 className="product-price">
+                $ {(parseFloat(product.price) + parseFloat(product.tax_price)).toFixed(2)}{" "}
+                <del className="product-old-price">
+                  $ {parseFloat(product.price).toFixed(2)}
+                </del>
+              </h4>
+            )}
+            
+            {product.tax_price ==  0 && (
+              <h4 className="product-price">
+                {isNaN(parseFloat(product.price)) ? product.price : `$ ${parseFloat(product.price).toFixed(2)}`}
+              </h4>
+            )}
             <div className="product-rating">
               <i className="fa fa-star"></i>
               <i className="fa fa-star"></i>
@@ -66,7 +75,7 @@ function ProductComponent({product}) {
                 <i className="fa fa-exchange"></i>
                 <span className="tooltipp">add to compare</span>
               </button>
-              <button className="quick-view" onClick={() => window.location.assign(product.product_id == 0 ? "#" : `product/${product.product_id}`)}>
+              <button className="quick-view" onClick={() => window.location.assign(product.product_id == 0 ? "#" : `/product/${product.product_id}`)}>
                 <i className="fa fa-eye"></i>
                 <span className="tooltipp">quick view</span>
               </button>
