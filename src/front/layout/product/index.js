@@ -62,7 +62,9 @@ function ForntProductPage() {
                                 <ul className="breadcrumb-tree">
                                     <li><a href="#">Home</a></li>
                                     <li><a href="#">Categories</a></li>
-                                    <li><a href="#">{productCategory.category_description_assoc && productCategory.category_description_assoc[0].name}</a></li>
+                                    {productCategory && (
+                                        <li><a href="#">{productCategory.category_description_assoc && productCategory.category_description_assoc[0].name}</a></li>
+                                    )}
                                     <li className="active">{productInfo.product_description_assoc && productInfo.product_description_assoc[0].name}</li>
                                 </ul>
                             </div>
