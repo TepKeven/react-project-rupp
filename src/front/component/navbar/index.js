@@ -12,13 +12,7 @@ function TopNavbarComponent() {
 
   const [dropdown,setDropdown] = useState(false)
 
-  const [cartItems,setCartItems] = useState([
-    // {id: 1, title: "Product 1", quantity: 1, price: 980.00,image: "/assets/images/products/product01.png"},
-    // {id: 2, title: "Product 2", quantity: 2, price: 980.00,image: "/assets/images/products/product02.png"},
-    // {id: 3, title: "Product 3", quantity: 2, price: 90.00,image: "/assets/images/products/product02.png"},
-    // {id: 4, title: "Product 4", quantity: 2, price: 100.00,image: "/assets/images/products/product01.png"}
-    
-  ])
+  const [cartItems,setCartItems] = useState([])
   const [informationPages, setInformationPages] = useState([
     
   ])
@@ -54,20 +48,20 @@ function TopNavbarComponent() {
 
   },[])
 
-  const deleteCartItem = (product_id) => {
+  // const deleteCartItem = (product_id) => {
 
-      const local_cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
+  //     const local_cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
 
-      // Cart in LocalStorage
-      const local_cart_items_remain = local_cart_items.filter(cart_item => cart_item.product_id != product_id)
+  //     // Cart in LocalStorage
+  //     const local_cart_items_remain = local_cart_items.filter(cart_item => cart_item.product_id != product_id)
 
-      // Cart in Variable
-      const cart_items = cartItems.filter(cartItem => cartItem.product_id != product_id)
+  //     // Cart in Variable
+  //     const cart_items = cartItems.filter(cartItem => cartItem.product_id != product_id)
       
-      setCartItems(cart_items)
-      localStorage.setItem("cart_items", JSON.stringify(local_cart_items_remain))  
-      toastNotificationSuccess("Cart Item Deleted Successfully") 
-  }
+  //     setCartItems(cart_items)
+  //     localStorage.setItem("cart_items", JSON.stringify(local_cart_items_remain))  
+  //     toastNotificationSuccess("Cart Item Deleted Successfully") 
+  // }
 
   return (
     <>
@@ -196,11 +190,12 @@ function TopNavbarComponent() {
       <div id="responsive-nav">
         <ul className="main-nav nav">
           <li><a href={`/`}>Home</a></li>
-          {informationPages.map((informationPage) => {
+          {/* {informationPages.map((informationPage) => {
             return (
               <li className={informationPage.information_id == 1 ? "" : "" } key={informationPage.information_id}><a href={`/page/${informationPage.information_id}`}>{informationPage.information_description_assoc[0].name}</a></li>
             )
-          })}
+          })} */}
+          <li><a href={`/about`}>About</a></li>
           <li><a href={`/contact`}>Contact</a></li>
           <li><a href={`/shop`}>Shop</a></li>
           <li><a href={`/cart`}>Cart</a></li>

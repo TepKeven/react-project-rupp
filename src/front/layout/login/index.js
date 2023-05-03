@@ -3,29 +3,11 @@ import React, { useEffect } from "react";
 import { toastNotificationError } from "../../functions";
 import globalVariable from "../../variable";
 import {
-  LoginSocialGoogle,
-  LoginSocialAmazon,
-  LoginSocialFacebook,
-  LoginSocialGithub,
-  LoginSocialInstagram,
-  LoginSocialLinkedin,
-  LoginSocialMicrosoft,
-  LoginSocialPinterest,
-  LoginSocialTwitter,
-  LoginSocialApple,
-  IResolveParams,
+  LoginSocialGoogle
 } from 'reactjs-social-login';
 
 import {
-  FacebookLoginButton,
-  GoogleLoginButton,
-  GithubLoginButton,
-  AmazonLoginButton,
-  InstagramLoginButton,
-  LinkedInLoginButton,
-  MicrosoftLoginButton,
-  TwitterLoginButton,
-  AppleLoginButton,
+  GoogleLoginButton
 } from 'react-social-login-buttons';
 import "./index.css"
 
@@ -33,7 +15,7 @@ const form_name = "form-customer-login"
 
 function FrontLoginPage() {
 
-  const REDIRECT_URI = 'http://localhost:3000/login';
+  // const REDIRECT_URI = 'http://localhost:3000/login';
   const url = new URL(window.location)
   const params = new URLSearchParams(url.search);
 
@@ -92,7 +74,7 @@ function FrontLoginPage() {
               </div>
             </div>
             <button type="button" class="btn btn-danger mt-5 w-100" onClick={setLogin}>Sign in</button>
-            <LoginSocialGoogle
+            {/* <LoginSocialGoogle
               client_id={process.env.REACT_APP_GG_APP_ID || ''}
               // onLoginStart={onLoginStart}
               redirect_uri={REDIRECT_URI}
@@ -108,7 +90,7 @@ function FrontLoginPage() {
               }}
             >
               <GoogleLoginButton />
-            </LoginSocialGoogle>
+            </LoginSocialGoogle> */}
           </form>
         </div>
       </div>

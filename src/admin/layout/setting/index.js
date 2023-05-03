@@ -39,7 +39,7 @@ function SettingPage() {
     //   window.location.assign("/admin/setting")
       
     }).catch((error) => {
-        // console.log(error)
+        console.log(error)
         // window.location.assign("/admin/login")
     })
 
@@ -85,7 +85,7 @@ function SettingPage() {
       <div id="main">
         <NavbarComponent />
         <div className="page-heading d-flex align-items-center justify-content-between">
-          <h3>Add Order</h3>
+          <h3>Add Settings</h3>
           <div class="pull-right">
             <button onClick={editSetting} data-toggle="tooltip" title="" class="btn btn-primary me-2" data-original-title="Save"><i class="fa fa-save"></i></button>
             <a href="/admin/order" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Cancel"><i class="fa fa-reply"></i></a>

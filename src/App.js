@@ -64,7 +64,7 @@ function App() {
           <Route path="login" element={<FrontLoginPage />} />
           <Route path="register" element={<FrontRegisterPage />} />
           <Route path="profile" element={<ProfilePage />} />
-          <Route path="product/:product_id" element={<FrontProductPage />} />
+          <Route path="" element={<FrontProductPage />} />
           <Route path="category/:category_id" element={<FrontCategoryPage />} />
           <Route path="page/:page_id_name" element={<FrontInformationPage />} />
       
